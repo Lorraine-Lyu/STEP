@@ -1,9 +1,49 @@
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 80%;
 }
 
 #greeting-container {
   margin-top: 20px;
 }
+
+#navbar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav-button {
+  float: left;
+}
+
+.ext-link {
+  float: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 33px;
+  height:33px;
+}
+
+.current {
+  background-color: #4269f5;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #4269f5;
+}
+
+
