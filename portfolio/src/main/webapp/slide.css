@@ -1,0 +1,10 @@
+/* styles for the slideshow */
+.pic {
+  display: none;
+  margin: auto;
+}
+
+.slide {
+  height: 480px;
+  width: 600px;
+}

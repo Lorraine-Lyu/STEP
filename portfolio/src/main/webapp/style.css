@@ -11,7 +11,6 @@ body {
 }
 
 #content {
-  background-color: var(--grey-light);
   color: var(--pink-light);
   height: 100%;
   margin-left: auto;
@@ -35,8 +34,8 @@ body {
   width: 200px;
 }
 
-/*All styles for navbar*/
-#navbar{
+/* All styles for navbar */
+#navbar {
   background-color: var(--green-dark);
   list-style-type: none;
   margin: 0;
@@ -74,7 +73,7 @@ body {
   background-color: var(--green-light);
 }
 
-/* styles for project.html*/
+/* styles for project.html */
 .proj {
   border-bottom: 1px var(--green-dark) solid;
   margin-bottom: 16px;
@@ -86,17 +85,6 @@ body {
   font-weight: bold;
   text-decoration: underline;
   text-decoration-color: var(--pink-light);
-}
-
-/* styles for gallery.html*/
-.pic {
-  display: none;
-  margin: auto;
-}
-
-.slide {
-  height: 480px;
-  width: 600px;
 }
 
 
