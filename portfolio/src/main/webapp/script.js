@@ -12,17 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+var slide1 = 0;
+var slide2 = 0;
+
 /**
- * Adds a random greeting to the page.
+ * Control both slideshow in gallery.html
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function flip(num, slide) {
+  var slide;
+  if (slide == 1) {
+    slide1 += num;
+    slide = document.getElementsById("slide1");
+    slide1 = updateFlip(slide1, slide);
+  } else {
+    slide2 += num;
+    slide = document.getElementsById("slide2");
+    slide2 = updateFlip(slide2, slide);
+  }
 }
+
+function updateFlip(show, slide) {
+  if (show > 4) {
+      show = 0;
+  } else if (show < 0) {
+      show = 4;
+  }
+  for (i = 0; i < 5; i++) {
+    slide[i].style.display = "none";  
+  }
+  slide[show].display = "block";
+  return show;
+}
+
+flip(0, 1);
+flip(0, 2);
