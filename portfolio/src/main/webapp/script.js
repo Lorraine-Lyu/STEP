@@ -18,15 +18,17 @@ var slide2 = 0;
 /**
  * Control both slideshow in gallery.html
  */
-function flip(num, slide) {
+function flip(num, sIndex) {
   var slide;
-  if (slide == 1) {
+  if (sIndex == 1) {
     slide1 += num;
-    slide = document.getElementsById("slide1");
+    slide = document.getElementById("slide1").getElementsByTagName("img");
+    console.log(slide);
     slide1 = updateFlip(slide1, slide);
   } else {
     slide2 += num;
-    slide = document.getElementsById("slide2");
+    slide = document.getElementById("slide2").getElementsByTagName("img");
+    console.log(slide);
     slide2 = updateFlip(slide2, slide);
   }
 }
@@ -40,9 +42,10 @@ function updateFlip(show, slide) {
   for (i = 0; i < 5; i++) {
     slide[i].style.display = "none";  
   }
-  slide[show].display = "block";
+  slide[show].style.display = "block";
   return show;
 }
+
 
 flip(0, 1);
 flip(0, 2);

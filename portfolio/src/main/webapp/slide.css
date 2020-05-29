@@ -5,6 +5,17 @@
 }
 
 .slide {
+  background-color: #1c3334;
   height: 480px;
   width: 600px;
+}
+
+.btn-left {
+  margin-bottom: 240px;
+  float: left; 
+}
+
+.btn-right {
+  margin-bottom: 240px;
+  float: right; 
 }

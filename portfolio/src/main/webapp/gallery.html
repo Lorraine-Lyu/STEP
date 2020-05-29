@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Lorraine Lyu's Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="slide.css">
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div id="content">
@@ -16,25 +17,25 @@
       </ul>
       <div class="main">
         <h1>My Image Gallary</h1>
-        <div class="slides">
-          <button class="btn-left" onclick="flip(-1, 1)"><</button>
-          <button class="btn-right" onclick="flip(1, 1)">></button>
+        <div class="slides" id="slide1">
           <img class="pic" src="images/cat0.jpg" alt="not_found.png">
           <img class="pic" src="images/cat1.jpg" alt="not_found.png">
           <img class="pic" src="images/cat2.jpg" alt="not_found.png">
           <img class="pic" src="images/cat3.jpg" alt="not_found.png">
           <img class="pic" src="images/cat4.jpg" alt="not_found.png">
+          <button class="btn-left" onclick="flip(-1, 1)"><</button>
+          <button class="btn-right" onclick="flip(1, 1)">></button>
         </div>
-      </div>
-        <div class="slides">
-          <button class="btn-left" onclick="flip(-1, 2)"><</button>
-          <button class="btn-right" onclick="flip(1, 2)">></button>
+        <div class="slides" id="slide2">
           <img class="pic" src="images/drawing1.jpg" alt="not_found.png">
           <img class="pic" src="images/drawing2.jpg" alt="not_found.png">
           <img class="pic" src="images/drawing3.jpg" alt="not_found.png">
           <img class="pic" src="images/drawing4.jpg" alt="not_found.png">
           <img class="pic" src="images/drawing5.jpg" alt="not_found.png">
+          <button class="btn-left" onclick="flip(-1, 2)"><</button>
+          <button class="btn-right" onclick="flip(1, 2)">></button>
         </div>
+      </div>
     </div>
   </body>
 </html>
