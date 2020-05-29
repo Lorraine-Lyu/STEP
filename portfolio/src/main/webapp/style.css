@@ -1,21 +1,38 @@
 :root {
-    --green-dark: #1c3334;
-    --green-light: #376e6f;
-    --grey-light: #2f4454;
-    --pink-dark: #2e151b;
-    --pink-light: #da7b93;
+  --green-dark: #1c3334;
+  --green-light: #376e6f;
+  --grey-light: #2f4454;
+  --pink-dark: #2e151b;
+  --pink-light: #da7b93;
+}
+
+body {
+  background-color: var(--grey-light)
 }
 
 #content {
-  color: var(--pink-light);
   background-color: var(--grey-light);
+  color: var(--pink-light);
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.main {
+  margin: auto;
+  padding: 5% 3% 5% 3%;
+  width: 70%;
+}
+
+#round-head {
+  border-radius: 120px;
+  background: url(images/head1.jpg);
+  background-position: right top;
+  background-repeat: repeat;
+  height: 200px;
+  padding: 20px;
+  width: 200px;
 }
 
 /*All styles for navbar*/
@@ -46,8 +63,8 @@
 }
 
 .nav-button .nav-link {
-  display: block;
   color: var(--pink-light);
+  display: block;
   padding: 14px 16px;
   text-decoration: none;
   text-align: center;
@@ -56,5 +73,31 @@
 .nav-button .nav-link:hover {
   background-color: var(--green-light);
 }
+
+/* styles for project.html*/
+.proj {
+  border-bottom: 1px var(--green-dark) solid;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+}
+
+.link {
+  color: var(--pink-light);
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: var(--pink-light);
+}
+
+/* styles for gallery.html*/
+.pic {
+  display: none;
+  margin: auto;
+}
+
+.slide {
+  height: 480px;
+  width: 600px;
+}
+
 
 
