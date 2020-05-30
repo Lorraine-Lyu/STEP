@@ -10,18 +10,31 @@ body {
   background-color: var(--grey-light)
 }
 
-#content {
+.link {
   color: var(--pink-light);
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: var(--pink-light);
 }
 
 .main {
   margin: auto;
   padding: 5% 3% 5% 3%;
   width: 70%;
+}
+
+.proj {
+  border-bottom: 1px var(--green-dark) solid;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+}
+
+#content {
+  color: var(--pink-light);
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 #round-head {
@@ -32,20 +45,6 @@ body {
   height: 200px;
   padding: 20px;
   width: 200px;
-}
-
-/* styles for project.html */
-.proj {
-  border-bottom: 1px var(--green-dark) solid;
-  margin-bottom: 16px;
-  padding-bottom: 5px;
-}
-
-.link {
-  color: var(--pink-light);
-  font-weight: bold;
-  text-decoration: underline;
-  text-decoration-color: var(--pink-light);
 }
 
 
