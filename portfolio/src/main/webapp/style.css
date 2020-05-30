@@ -34,45 +34,6 @@ body {
   width: 200px;
 }
 
-/* All styles for navbar */
-#navbar {
-  background-color: var(--green-dark);
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-}
-
-.nav-button {
-  float: left;
-}
-
-.ext-link {
-  float: right;
-  height: 33px;
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  width: 33px;
-}
-
-.current {
-  background-color: var(--green-light);
-}
-
-.nav-button .nav-link {
-  color: var(--pink-light);
-  display: block;
-  padding: 14px 16px;
-  text-decoration: none;
-  text-align: center;
-}
-
-.nav-button .nav-link:hover {
-  background-color: var(--green-light);
-}
-
 /* styles for project.html */
 .proj {
   border-bottom: 1px var(--green-dark) solid;
