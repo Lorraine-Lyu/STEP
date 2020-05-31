@@ -5,12 +5,10 @@
     <title>Lorraine Lyu's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slide.css">
-    <script src="script.js" defer></script>
-    <script src="navbar.js"></script>
+    <script src="slide.js" defer></script>
   </head>
   <body>
     <div id="content">
-      <embed src="navbar.html" width="1000" height="50"></embed>
       <div class="main">
         <h1>My Image Gallary</h1>
         <div class="slides" id="slide1">
@@ -19,8 +17,8 @@
           <img class="pic" src="images/cat2.jpg" alt="My Cat And His New Bed">
           <img class="pic" src="images/cat3.jpg" alt="My Cat Taking Over My Parents' Bed">
           <img class="pic" src="images/cat4.jpg" alt="My Cat On His First Birthday">
-          <button class="btn-left" onclick="flip(-1, 1)"><</button>
-          <button class="btn-right" onclick="flip(1, 1)">></button>
+          <button class="s-btn" onclick="flip(-1, 1)"><</button>
+          <button class="btn-right btn" onclick="flip(1, 1)">></button>
         </div>
         <div class="slides" id="slide2">
           <img class="pic" src="images/drawing1.jpg" alt="Chinese Painting, White Plums">
@@ -28,8 +26,8 @@
           <img class="pic" src="images/drawing3.jpg" alt="Paper Art, Chameleon">
           <img class="pic" src="images/drawing4.jpg" alt="Oil Painting, Self Portrait">
           <img class="pic" src="images/drawing5.jpg" alt="Digital Sketching Practice">
-          <button class="btn-left" onclick="flip(-1, 2)"><</button>
-          <button class="btn-right" onclick="flip(1, 2)">></button>
+          <button class="s-btn" onclick="flip(-1, 2)"><</button>
+          <button class="btn-right btn" onclick="flip(1, 2)">></button>
         </div>
       </div>
     </div>

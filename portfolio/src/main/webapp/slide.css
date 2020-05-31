@@ -7,15 +7,19 @@
 .slide {
   background-color: #1c3334;
   height: 480px;
-  width: 600px;
+  margin-bottom: 30px;
+  position: relative;
+  width: 720px;
 }
 
-.btn-left {
-  margin-bottom: 240px;
-  float: left; 
+.s-btn {
+  border: none;
+  color: #da7b93;
+  font: bold 32px;
+  position: absolute;
+  top: 50%; 
 }
 
 .btn-right {
-  margin-bottom: 240px;
-  float: right; 
+  right: 0;
 }

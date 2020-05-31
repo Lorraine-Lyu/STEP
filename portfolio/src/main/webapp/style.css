@@ -6,8 +6,19 @@
   --pink-light: #da7b93;
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  background-color: var(--grey-light)
+  background-color: var(--grey-light);
+  height: 100%;
+}
+
+.frame {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  border: none;
+  margin: auto;
 }
 
 .link {
@@ -18,9 +29,8 @@ body {
 }
 
 .main {
-  margin: auto;
-  padding: 5% 3% 5% 3%;
-  width: 70%;
+  padding: 2% 8% 2% 8%;
+  height: 80%;
 }
 
 .proj {
