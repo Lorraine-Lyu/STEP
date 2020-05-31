@@ -11,15 +11,12 @@
   float: right;
   height: 33px;
   list-style-type: none;
-  margin: 0;
+  margin: 3px 2px 3px 2px;
   overflow: hidden;
   padding: 0;
   width: 33px;
 }
  
-.main {
-    margin: 5% 3% 5% 3%;
-}
 .nav-button {
   float: left;
 }
