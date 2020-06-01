@@ -2,7 +2,7 @@
  * @param {integer} str index of page the iframe should load
  */
 function load(str) {
-  var frame = document.getElementsByTagName("iframe")[0];
+  const frame = document.getElementsByTagName("iframe")[0];
   switch(str) {
     case 1:
       frame.src = "main.html";
