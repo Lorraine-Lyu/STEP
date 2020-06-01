@@ -1,5 +1,5 @@
 /* change src of iframe according to input index
- * @param {integer} index of page the iframe should load
+ * @param {integer} str index of page the iframe should load
  */
 function load(str) {
   var frame = document.getElementsByTagName("iframe")[0];
