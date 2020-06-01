@@ -4,12 +4,15 @@
 }
 
 .pic {
+    margin: auto;
+}
+
+.pic-hide {
   display: none;
 }
 
 .pic-show {
   display: block;
-  margin: auto;
 }
 
 .slide {
