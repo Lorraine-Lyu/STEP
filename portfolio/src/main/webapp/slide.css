@@ -5,6 +5,10 @@
 
 .pic {
   display: none;
+}
+
+.pic-show {
+  display: block;
   margin: auto;
 }
 

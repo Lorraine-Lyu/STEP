@@ -14,23 +14,20 @@
 
 // the indexes recording the picture 
 // the slides in gallery.html is showing
-var slide1 = 0;
-var slide2 = 0;
+let slide1 = 0;
+let slide2 = 0;
+const MAX_PAGE_INDEX = 4;
 
 /**
- * Controls(flips) both slideshow in gallery.html
+ * flips both slideshow in gallery.html
+ * @param {integer}  num number of pages to flip
+ * @param {integer}  sIndex index of the slide to be fliped
  */
-function flip(/* num of pages to flip= */ num, 
-  /* index of the slide= */ sIndex) {
-  var slide;
+const flip = (num, sIndex) => {
   if (sIndex == 1) {
-    slide1 += num;
-    slide = document.getElementById("slide1").getElementsByTagName("img");
-    slide1 = updateFlip(slide1, slide);
+    slide1 = updateFlip(slide1, slide1 + num, "slide1");
   } else {
-    slide2 += num;
-    slide = document.getElementById("slide2").getElementsByTagName("img");
-    slide2 = updateFlip(slide2, slide);
+    slide2 = updateFlip(slide2, slide2 + num, "slide2");
   }
 }
 
@@ -38,18 +35,23 @@ function flip(/* num of pages to flip= */ num,
  * The helper function for flip(n,s); 
  * sets the input slide to show 
  * picture corresponding to the 'show' index
+ * @param {integer} prev of the image needs to be hided
+ * @param {integer}  show  the index of picture the slide should flip to
+ * @param {string} slideStr the class name HTML slide object to be flipped
+ * @returns {integer}  show the updated index for one of the slides
  */
-function updateFlip(/* page index= */ show, slide) {
-  if (show > 4) {
+const updateFlip = (prev, show, slideStr) => {
+  let slide = document.getElementById(slideStr).getElementsByTagName("img");
+  if (show > MAX_PAGE_INDEX) {
       show = 0;
   } else if (show < 0) {
-      show = 4;
+      show = MAX_PAGE_INDEX;
   }
 
-  for (i = 0; i < 5; i++) {
-    slide[i].style.display = "none";  
-  }
-  slide[show].style.display = "block";
+  slide[show].classList.remove("pic");
+  slide[show].classList.add("pic-show");
+  slide[prev].classList.remove('pic-show');
+  slide[prev].classList.add("pic");
   return show;
 }
 
