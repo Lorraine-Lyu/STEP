@@ -10,24 +10,32 @@
   <body>
     <div id="content">
       <ul id="navbar">
-        <li class="nav-button" ><button class="nav-link" onclick="load(1)">Home</button></li>
-        <li class="nav-button"><button class="nav-link" onclick="load(2)">Introduction</button></li>
-        <li class="nav-button"><button class="nav-link" onclick="load(3)">Projects</button></li>
-        <li class="nav-button"><button class="nav-link" onclick="load(4)">Gallery</button></li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(0)">Home</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(1)">Introduction</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(2)">Projects</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(3)">Gallery</button>
+        </li>
         <li>
           <a class="ext-link" href="https://github.com/Lorraine-Lyu" title="Github">
             <img alt="Github" src="images/github_small.png">
           </a>
         </li>
         <li>
-          <a class="ext-link" href="https://linkedin.com/in/yun-lyu-67b5b115b/" title="Linkedin">
+          <a class="ext-link" href="https://linkedin.com/in/yun-lyu-67b5b115b/" 
+              title="Linkedin">
             <img alt="Linkedin" src="images/linkedin_small.png">
           </a>
         </li>
       </ul>
       <div class="main">
-        <iframe class="frame" src="main.html" width="84%" height="96%">
-        </iframe>
+        <iframe class="frame" src="main.html" width="84%" height="96%" id="sub-page"></iframe>
       </div>
     </div>
   </body>
