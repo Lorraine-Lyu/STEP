@@ -1,9 +1,9 @@
-/* change src of iframe according to input index
- * @param {integer} str index of page the iframe should load
+/* change src of iframe according to pageIndex
+ * @param {integer} pageIndex index of page the iframe should load
  */
-function load(str) {
+function load(pageIndex) {
   const frame = document.getElementsByTagName("iframe")[0];
-  switch(str) {
+  switch(pageIndex) {
     case 1:
       frame.src = "main.html";
       break;
