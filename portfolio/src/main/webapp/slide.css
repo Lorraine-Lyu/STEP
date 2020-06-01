@@ -1,4 +1,8 @@
 /* styles for the slideshow */
+.btn-right {
+  right: 0;
+}
+
 .pic {
   display: none;
   margin: auto;
@@ -18,8 +22,4 @@
   font: bold 32px;
   position: absolute;
   top: 50%; 
-}
-
-.btn-right {
-  right: 0;
 }
