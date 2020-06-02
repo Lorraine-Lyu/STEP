@@ -1,14 +1,14 @@
 /* styles for the slideshow */
+img {
+  display: none;
+}
+
 .btn-right {
   right: 0;
 }
 
 .pic {
     margin: auto;
-}
-
-.pic-hide {
-  display: none;
 }
 
 .pic-show {
