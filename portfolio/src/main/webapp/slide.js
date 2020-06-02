@@ -53,7 +53,7 @@ const updateFlip = (prev, show, slideStr) => {
   return show;
 }
 
-// Loads the first picture of both slides when the document is loaded.
+/** Loads the first picture of both slides when the document is loaded. */
 window.onload = () => {
   document.getElementById("slide1").getElementsByTagName("img")[0]
       .classList.add("pic-show");
