@@ -3,28 +3,39 @@
   <head>
     <meta charset="UTF-8">
     <title>Lorraine Lyu's Portfolio</title>
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script rel="nav.js"></script>
   </head>
   <body>
     <div id="content">
       <ul id="navbar">
-        <li class="nav-button current" ><a>Home</a></li>
-        <li class="nav-button"><a href="introduction.html">Introduction</a></li>
-        <li class="nav-button"><a>Projects</a></li>
-        <li class="nav-button"><a>Gallery</a></li>
-        <li>
-          <a class="ext-link" href="https://github.com/Lorraine-Lyu"><img alt="link to github" src="images/github.svg"></a>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(0)">Home</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(1)">Introduction</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(2)">Projects</button>
+        </li>
+        <li class="nav-button">
+          <button class="nav-link" onclick="loadFrame(3)">Gallery</button>
         </li>
         <li>
-          <a class="ext-link" href="https://github.com/Lorraine-Lyu"><img alt="link to linkedin" src="images/linkedin.svg"></a>
+          <a class="ext-link" href="https://github.com/Lorraine-Lyu" title="Github">
+            <img alt="Github" src="images/github_small.png">
+          </a>
+        </li>
+        <li>
+          <a class="ext-link" href="https://linkedin.com/in/yun-lyu-67b5b115b/" 
+              title="Linkedin">
+            <img alt="Linkedin" src="images/linkedin_small.png">
+          </a>
         </li>
       </ul>
-      <h1>I'm Lorraine Lyu. Welcome to see my portfolio!</h1>
-      <p>My real name is Yun Lyu, but you don't need to memorize or pronounce it. Just call me Lorraine!</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <div class="main">
+        <iframe class="frame" src="main.html" width="84%" height="96%" id="sub-page"></iframe>
+      </div>
     </div>
   </body>
-</html>
