@@ -3,7 +3,7 @@
  * @param {integer} pageIndex index of page the iframe should load
  */
 function loadFrame(pageIndex) {
-  const frame = document.getElementById("iframe");
+  const frame = document.getElementById('iframe');
   const sources = [
     'main.html', 
     'introduction.html', 
