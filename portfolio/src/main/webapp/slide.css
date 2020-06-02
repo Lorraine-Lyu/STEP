@@ -1,8 +1,4 @@
 /* styles for the slideshow */
-img {
-  display: none;
-}
-
 .btn-right {
   right: 0;
 }
@@ -11,7 +7,11 @@ img {
     margin: auto;
 }
 
-.pic-show {
+.slides .pic {
+  display: none;
+}
+
+.slides .pic-show {
   display: block;
 }
 
