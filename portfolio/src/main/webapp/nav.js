@@ -10,7 +10,7 @@
  * Change src of iframe according to pageIndex
  * @param {integer} pageIndex index of page the iframe should load
  */
-function loadFrame(pageIndex) {
+const loadFrame = (pageIndex) => {
   const frame = document.getElementById('sub-page');
   frame.src = sources[pageIndex];
 }
