@@ -38,7 +38,7 @@ const flip = (num, sIndex) => {
  * @param {integer} prev of the image needs to be hided
  * @param {integer}  show  the index of picture the slide should flip to
  * @param {string} slideStr the class name HTML slide object to be flipped
- * @returns {integer}  show the updated index for one of the slides
+ * @returns {integer} show the updated index for one of the slides
  */
 const updateFlip = (prev, show, slideStr) => {
   let slide = document.getElementById(slideStr).getElementsByTagName("img");
@@ -54,7 +54,3 @@ const updateFlip = (prev, show, slideStr) => {
   slide[prev].classList.add("pic-hide");
   return show;
 }
-
-// set both slides to the first page
-flip(0, 1);
-flip(0, 2);
