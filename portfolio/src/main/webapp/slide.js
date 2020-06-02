@@ -48,9 +48,15 @@ const updateFlip = (prev, show, slideStr) => {
       show = MAX_PAGE_INDEX;
   }
 
-  slide[show].classList.remove("pic-hide");
   slide[show].classList.add("pic-show");
   slide[prev].classList.remove('pic-show');
-  slide[prev].classList.add("pic-hide");
   return show;
 }
+
+// Loads the first picture of both slides when the document is loaded.
+window.onload = () => {
+  document.getElementById("slide1").getElementsByTagName("img")[0]
+      .classList.add("pic-show");
+  document.getElementById("slide2").getElementsByTagName("img")[0]
+      .classList.add("pic-show");
+};
