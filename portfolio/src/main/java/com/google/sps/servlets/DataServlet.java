@@ -14,15 +14,15 @@
 
 package com.google.sps.servlets;
 
-import java.io.IOException;
 import com.google.gson.Gson;
+import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-/** Servlet that returns some content hard coded. */
+/** Servlet that returns some hard coded strings. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -32,17 +32,9 @@ public class DataServlet extends HttpServlet {
     test.add("test str 1");
     test.add("test str 2");
     test.add("test str 3");
-    String strList = lstToJson(test);
-    response.setContentType("application/json;");
-    response.getWriter().println(strList);
-  }
-
-    /**
-   * Converts ArrayList<String> into JSON string using the Gson library. 
-   */
-  private String lstToJson(ArrayList<String> lst) {
     Gson gson = new Gson();
-    String json = gson.toJson(lst);
-    return json;
+    String stringList = gson.toJson(test);
+    response.setContentType("application/json;");
+    response.getWriter().println(stringList);
   }
 }

@@ -12,16 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * fetches data from servelet
- */
-const fetchData = async () => {
+// Fetches data from servelet when the document is loaded
+window.onload = async () => {
   const response = await fetch('/data');
-  const lst = await response.json();
-  console.log(lst);
-  for (text of lst) {
-    document.getElementById('comments').innerHTML += "<p>" + text + "</p>";
+  const jsonArray = await response.json();
+  let comments = '';
+  for (text of jsonArray) {
+    comments += '<p>' + text + '</p>';
   }
+  document.getElementById('comments').innerHTML += comments;
 }
-
-window.onload = fetchData;
