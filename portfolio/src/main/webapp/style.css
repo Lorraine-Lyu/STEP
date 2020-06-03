@@ -15,9 +15,16 @@ body {
   height: 100%;
 }
 
+.field {
+  outline: none;
+  resize: none;
+  overflow: auto;
+}
+
 .frame {
   box-shadow: 5px 10px 8px var(--green-dark);
   border: none;
+  float: right;
   margin: auto;
 }
 
@@ -29,7 +36,7 @@ body {
 }
 
 .main {
-  padding: 2% 8% 2% 8%;
+  padding: 2% 4% 2% 4%;
   height: 80%;
 }
 
@@ -37,6 +44,20 @@ body {
   border-bottom: 1px var(--green-dark) solid;
   margin-bottom: 16px;
   padding-bottom: 5px;
+}
+
+#comments {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  float: left;
+  height: 90%;
+  width: 20%;
+}
+
+#comment-box {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  float: bottom;
+  height: 8%;
+  width: 100%;
 }
 
 #content {
