@@ -5,7 +5,7 @@
     <title>Lorraine Lyu's Portfolio</title>
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="style.css">
-    <script rel="nav.js"></script>
+    <script src="nav.js"></script>
   </head>
   <body>
     <div id="content">
@@ -35,7 +35,14 @@
         </li>
       </ul>
       <div class="main">
-        <iframe class="frame" src="main.html" width="84%" height="96%" id="sub-page"></iframe>
+        <iframe class="frame" src="main.html" width="76%" height="90%" id="sub-page"></iframe>
+        <form action="/comment" method="POST" id="comment-box">
+          <label for="name">Preferred name:</label>
+          <input name="name" class="field" type="text"></input>
+          <label>Comments:</label>
+          <textarea name="comment" class="field" rows="3" cols="40"></textarea>
+          <input type="submit" id="submit-btn">
+        </form>
       </div>
     </div>
   </body>
