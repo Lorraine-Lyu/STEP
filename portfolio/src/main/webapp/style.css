@@ -16,8 +16,10 @@ body {
 }
 
 .field {
-  outline: none;
+  display: inline-block;
+  margin: 2px 5px 2px 5px;
   resize: none;
+  outline: none;
   overflow: auto;
 }
 
@@ -54,10 +56,13 @@ body {
 }
 
 #comment-box {
+  bottom: 0;
   box-shadow: 5px 10px 8px var(--green-dark);
-  float: bottom;
-  height: 8%;
-  width: 100%;
+  display: block;
+  height: 12%;
+  margin: auto;
+  position: absolute;
+  width: 80%;
 }
 
 #content {
@@ -76,6 +81,18 @@ body {
   height: 200px;
   padding: 20px;
   width: 200px;
+}
+
+#submit-btn {
+  background-color: var(--green-dark);
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  margin: 5px;
+  padding: 8px 12px;
+  position: absolute;
+  right: 0;
 }
 
 

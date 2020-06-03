@@ -37,13 +37,11 @@
       <div class="main">
         <iframe class="frame" src="main.html" width="76%" height="90%" id="sub-page"></iframe>
         <form action="/comment" method="POST" id="comment-box">
-          <p>Enter your preferred name:</p>
-          <textarea name="name" class="field" rows="1"></textarea>
-          <br>
-          <p>Enter your comments:</p>
-          <textarea name="comment" class="field" rows="3"></textarea>
-          <br>
-          <input type="submit">
+          <label for="name">Preferred name:</label>
+          <input name="name" class="field" type="text"></input>
+          <label>Comments:</label>
+          <textarea name="comment" class="field" rows="3" cols="40"></textarea>
+          <input type="submit" id="submit-btn">
         </form>
       </div>
     </div>
