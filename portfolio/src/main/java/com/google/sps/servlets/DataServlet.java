@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns some content hard coded. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -38,8 +38,7 @@ public class DataServlet extends HttpServlet {
   }
 
     /**
-   * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
-   * the Gson library dependency to pom.xml.
+   * Converts ArrayList<String> into JSON string using the Gson library. 
    */
   private String lstToJson(ArrayList<String> lst) {
     Gson gson = new Gson();
