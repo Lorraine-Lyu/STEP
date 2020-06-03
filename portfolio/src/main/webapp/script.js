@@ -13,13 +13,15 @@
 // limitations under the License.
 
 /**
- * fetch data from servelet
+ * fetches data from servelet
  */
 const fetchData = async () => {
   const response = await fetch('/data');
-  const quote = await response.text();
-  console.log("quote");
-//   document.getElementById('quote-container').innerText = quote;
+  const lst = await response.json();
+  console.log(lst);
+  for (text of lst) {
+    document.getElementById('comments').innerHTML += "<p>" + text + "</p>";
+  }
 }
 
 window.onload = fetchData;
