@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 /** Servlet that returns some hard coded strings. */
-@WebServlet("/data")
+@WebServlet("/comment")
 public class DataServlet extends HttpServlet {
   private final String CONTENT_TYPE = "application/json";
   private String stringList = new Gson()
