@@ -26,10 +26,17 @@ import java.util.ArrayList;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
   private final String CONTENT_TYPE = "application/json";
-  private String stringList = new Gson()
-      .toJson(new String[] {"test str1", "test str2", "test str3"});
+  private String stringList = "";
 
+  /** The temporary constructor which instantiates json array with test string 
+  * NOTE: This constructor will be removed after the servelet connects to database
+  */
+  public DataServlet() {
+    super();
+    stringList = new Gson().toJson(new String[] {"test str1", "test str2", "test str3"});
+  }
 
+  //Tests sending hardcoded strings to client
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(CONTENT_TYPE);
