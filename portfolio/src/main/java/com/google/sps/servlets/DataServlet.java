@@ -25,16 +25,14 @@ import java.util.ArrayList;
 /** Servlet that returns some hard coded strings. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  private final String CONTENT_TYPE = "application/json";
+  private String stringList = new Gson()
+      .toJson(new String[] {"test str1", "test str2", "test str3"});
+
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> test = new ArrayList<String>();
-    test.add("test str 1");
-    test.add("test str 2");
-    test.add("test str 3");
-    Gson gson = new Gson();
-    String stringList = gson.toJson(test);
-    response.setContentType("application/json;");
+    response.setContentType(CONTENT_TYPE);
     response.getWriter().println(stringList);
   }
 }
