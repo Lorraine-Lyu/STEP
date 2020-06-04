@@ -16,6 +16,6 @@
 window.onload = async () => {
   const response = await fetch('/data');
   const jsonArray = await response.json();
-  const comments = jsonArray.map(text => `<p> ${text}</p>`).join("");
+  const comments = jsonArray.map(text => `<p> ${text}</p>`).join('');
   document.getElementById('comments').innerHTML = comments;
 }
