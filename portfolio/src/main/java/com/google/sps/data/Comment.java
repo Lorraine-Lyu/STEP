@@ -5,9 +5,8 @@ package com.google.sps.data;
  */
 public class Comment {
 
-  private String userName;
-
-  private String comment;
+  private final String userName;
+  private final String comment;
 
   public Comment(String name, String comment) {
       this.userName = name;
@@ -15,7 +14,7 @@ public class Comment {
   }
 
   /** 
-   * Getter of the comment text 
+   * Getter of the comment text. 
    * @return the actual comment
    */
   public String getComment() {
@@ -23,7 +22,7 @@ public class Comment {
   }
 
   /** 
-   * Getter of person's name who gave the comment 
+   * Getter of person's name who gave the comment.
    * @return the person's preferred name
    */
   public String getUserName() {
