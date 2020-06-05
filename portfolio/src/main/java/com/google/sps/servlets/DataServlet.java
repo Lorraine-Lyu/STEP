@@ -34,13 +34,16 @@ import java.util.List;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
+  // Response content type and redirect path
+  private final String HTML_CONTENT_TYPE = "text/html";
+  private final String INDEX_PATH = "/index.html";
   private final String JSON_CONTENT_TYPE = "application/json";
-
-  private String ENTITY_TYPE = "comment";
-
-  private String FIELD_NAME = "name";
-
-  private String FIELD_TEXT = "text";
+  // The type of entity in database, fields in entity
+  private final String ENTITY_TYPE = "comment";
+  private final String COMMENT_NAME = "name";
+  private final String COMMENT_TEXT = "text";
+  // The default value for undefined fields
+  private final String DEFAULT_VAL = "";
 
   /** The Java to JSON converter */
   private Gson gson = new Gson();
@@ -58,8 +61,8 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> comments = new ArrayList<>();
     results.asIterable().forEach(entity -> {
-      String name = (String) entity.getProperty(FIELD_NAME);
-      String text = (String) entity.getProperty(FIELD_TEXT);
+      String name = (String) entity.getProperty(COMMENT_NAME);
+      String text = (String) entity.getProperty(COMMENT_TEXT);
       comments.add(new Comment(name, text));
     });
 
