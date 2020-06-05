@@ -75,25 +75,24 @@ public class DataServlet extends HttpServlet {
       return defaultValue;
     }
     return value;
+  }
+
 
   /** Queries data from datastore and sends to clients */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("comment");
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
+    Query query = new Query(ENTITY_TYPE);
     PreparedQuery results = datastore.prepare(query);
 
-    List<Comment> tasks = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      String name = (String) entity.getProperty("name");
-      String text = (String) entity.getProperty("text");
+    List<Comment> comments = new ArrayList<>();
+    results.asIterable().forEach(entity -> {
+      String name = (String) entity.getProperty(FIELD_NAME);
+      String text = (String) entity.getProperty(FIELD_TEXT);
+      comments.add(new Comment(name, text));
+    });
 
-      Comment comment = new Comment(name, text);
-      tasks.add(comment);
-    }
-
-    response.setContentType(CONTENT_TYPE);
-    response.getWriter().println(gson.toJson(tasks));
+    response.setContentType(JSON_CONTENT_TYPE);
+    response.getWriter().println(gson.toJson(comments));
   }
 }
