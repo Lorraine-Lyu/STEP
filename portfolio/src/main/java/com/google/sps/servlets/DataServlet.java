@@ -34,19 +34,19 @@ import java.util.List;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  // Response content type and redirect path
+  // Response content type and redirect path.
   private final String HTML_CONTENT_TYPE = "text/html";
   private final String JSON_CONTENT_TYPE = "application/json";
   private final String INDEX_PATH = "/index.html";
-  // The type of entity in database, fields in entity
+  // The type of entity in database, fields in entity.
   private final String ENTITY_TYPE = "comment";
   private final String COMMENT_NAME = "name";
   private final String COMMENT_TEXT = "text";
-  // The default value for undefined fields
+  // The default value for undefined fields.
   private final String DEFAULT_VAL = "";
-  // The object connected to datastore
+  // The object connected to datastore.
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  // The Java to JSON converter
+  // The Java to JSON converter.
   Gson gson = new Gson();
 
   @Override
@@ -55,7 +55,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, COMMENT_NAME, DEFAULT_VAL); 
     String text = getParameter(request, COMMENT_TEXT, DEFAULT_VAL);
 
-    // Generate comment entity
+    // Generate comment entity.
     Entity comment = new Entity(ENTITY_TYPE);
     comment.setProperty(COMMENT_NAME, name);
     comment.setProperty(COMMENT_TEXT, text);
