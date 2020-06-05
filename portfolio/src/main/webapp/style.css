@@ -73,6 +73,13 @@ body {
   width: 100%;
 }
 
+#comments {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  height: 80%;
+  width: 22%;
+  float: right;
+}
+
 #round-head {
   border-radius: 120px;
   background: url(images/head1.jpg);

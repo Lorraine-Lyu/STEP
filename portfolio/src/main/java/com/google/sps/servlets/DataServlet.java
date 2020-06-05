@@ -14,19 +14,32 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+/** Servlet that returns some hard coded strings. */
+@WebServlet("/comment")
 public class DataServlet extends HttpServlet {
+  private final String CONTENT_TYPE = "application/json";
+  private String stringList = "";
 
+  /** The temporary constructor which instantiates json array with test string 
+  * NOTE: This constructor will be removed after the servelet connects to database
+  */
+  public DataServlet() {
+    super();
+    stringList = new Gson().toJson(new String[] {"test str1", "test str2", "test str3"});
+  }
+
+  //Tests sending hardcoded strings to client
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+    response.setContentType(CONTENT_TYPE);
+    response.getWriter().println(stringList);
   }
 }
