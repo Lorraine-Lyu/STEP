@@ -21,7 +21,6 @@ public class Comment {
     return this.comment;
   }
 
-
   /** 
    * Getter of person's name who gave the comment.
    * @return the person's preferred name
