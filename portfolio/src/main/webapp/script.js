@@ -14,7 +14,7 @@
 
 // Fetches data from servelet when the document is loaded
 window.onload = async () => {
-  const response = await fetch('/data');
+  const response = await fetch('/comment');
   const jsonArray = await response.json();
   const comments = jsonArray.map(text => `<p> ${text}</p>`).join('');
   document.getElementById('comments').innerHTML = comments;
