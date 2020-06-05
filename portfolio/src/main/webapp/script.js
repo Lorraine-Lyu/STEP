@@ -22,6 +22,7 @@ window.onload = async () => {
     console.log(e);
     return;
   }
+  
   try {
     const jsonArray = await commentResponse.json();
     const comments = jsonArray
