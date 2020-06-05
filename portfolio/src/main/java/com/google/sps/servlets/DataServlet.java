@@ -44,6 +44,7 @@ public class DataServlet extends HttpServlet {
   private final String COMMENT_TEXT = "text";
   // The default value for undefined fields
   private final String DEFAULT_VAL = "";
+
   // The object connected to datastore
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The Java to JSON converter
@@ -61,7 +62,6 @@ public class DataServlet extends HttpServlet {
     comment.setProperty(COMMENT_TEXT, text);
 
     datastore.put(comment);
- 
     response.sendRedirect(INDEX_PATH);
   }
 
@@ -87,8 +87,8 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> comments = new ArrayList<>();
     results.asIterable().forEach(entity -> {
-      String name = (String) entity.getProperty(FIELD_NAME);
-      String text = (String) entity.getProperty(FIELD_TEXT);
+      String name = (String) entity.getProperty(COMMENT_NAME);
+      String text = (String) entity.getProperty(COMMENT_TEXT);
       comments.add(new Comment(name, text));
     });
 
