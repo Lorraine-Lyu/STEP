@@ -44,7 +44,6 @@ public class DataServlet extends HttpServlet {
   private final String COMMENT_TEXT = "text";
   // The default value for undefined fields
   private final String DEFAULT_VAL = "";
-  
   // The object connected to datastore
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The Java to JSON converter
