@@ -17,63 +17,46 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /** Servlet that handles GET and POST requests for comments. */
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
-  
-  private final String JSON_CONTENT_TYPE = "application/json";
 
-  // Response content type and redirect path
-  private final String HTML_CONTENT_TYPE = "text/html";
-  private final String INDEX_PATH = "/index.html";
-  // The type of entity in database, fields in entity
-  private final String ENTITY_TYPE = "comment";
-  private final String COMMENT_NAME = "name";
-  private final String COMMENT_TEXT = "text";
-  // The default value for undefined fields
-  private final String DEFAULT_VAL = "";
+  /** The content type of response */
+  private final String CONTENT_TYPE = "application/json";
 
-  // This method is defined on the other branch
+  /** Queries data from datastore and sends to clients */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType(HTML_CONTENT_TYPE);
-    response.getWriter().println(DEFAULT_VAL); 
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    String name = getParameter(request, COMMENT_NAME, DEFAULT_VAL); 
-    String text = getParameter(request, COMMENT_TEXT, DEFAULT_VAL);
-
-    // Generate comment entity
-    Entity comment = new Entity(ENTITY_TYPE);
-    comment.setProperty(COMMENT_NAME, name);
-    comment.setProperty(COMMENT_TEXT, text);
+    Query query = new Query("comment");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(comment);
- 
-    response.sendRedirect(INDEX_PATH);
-  }
+    PreparedQuery results = datastore.prepare(query);
 
-  /**
-   * @return the request parameter, or the default value if the parameter
-   *         was not specified by the client
-   */
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
+    List<Comment> tasks = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      String name = (String) entity.getProperty("name");
+      String text = (String) entity.getProperty("text");
+
+      Comment comment = new Comment(name, text);
+      tasks.add(comment);
     }
-    return value;
+
+    Gson gson = new Gson();
+
+    response.setContentType(CONTENT_TYPE);
+    response.getWriter().println(gson.toJson(tasks));
   }
 }
