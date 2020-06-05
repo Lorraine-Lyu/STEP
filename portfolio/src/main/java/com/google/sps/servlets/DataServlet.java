@@ -36,23 +36,49 @@ public class DataServlet extends HttpServlet {
 
   // Response content type and redirect path
   private final String HTML_CONTENT_TYPE = "text/html";
-  private final String INDEX_PATH = "/index.html";
   private final String JSON_CONTENT_TYPE = "application/json";
+  private final String INDEX_PATH = "/index.html";
   // The type of entity in database, fields in entity
   private final String ENTITY_TYPE = "comment";
   private final String COMMENT_NAME = "name";
   private final String COMMENT_TEXT = "text";
   // The default value for undefined fields
   private final String DEFAULT_VAL = "";
+  
+  // The object connected to datastore
+  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  // The Java to JSON converter
+  Gson gson = new Gson();
 
-  /** The Java to JSON converter */
-  private Gson gson = new Gson();
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String name = getParameter(request, COMMENT_NAME, DEFAULT_VAL); 
+    String text = getParameter(request, COMMENT_TEXT, DEFAULT_VAL);
 
-  /** The object which communicates with database */
-  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    // Generate comment entity
+    Entity comment = new Entity(ENTITY_TYPE);
+    comment.setProperty(COMMENT_NAME, name);
+    comment.setProperty(COMMENT_TEXT, text);
+
+    datastore.put(comment);
+    response.sendRedirect(INDEX_PATH);
+  }
+
+  /**
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
 
 
-  /** Queries data from datastore and sends to clients */
+  /** Queries data from datastore and sends to clients. */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     

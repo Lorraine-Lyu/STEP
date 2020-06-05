@@ -1,7 +1,7 @@
 package com.google.sps.data;
 
 /** 
- * The object representing a comment on Lorraine's online portfolio
+ * The object representing a comment on Lorraine's online portfolio.
  */
 public class Comment {
 
@@ -20,6 +20,7 @@ public class Comment {
   public String getComment() {
     return this.comment;
   }
+
 
   /** 
    * Getter of person's name who gave the comment.
