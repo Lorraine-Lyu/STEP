@@ -28,10 +28,15 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private final String HTML_Contant_Type = "text/html";
+
   private final String REDIRECT = "/index.html";
+
   private final String ENTITY_TYPE = "comment";
+
   private final String FIELD_NAME = "name";
+
   private final String FIELD_TEXT = "text";
+  
   private final String DEFAULT_VAL = "";
 
   // This method is defined on the other branch
