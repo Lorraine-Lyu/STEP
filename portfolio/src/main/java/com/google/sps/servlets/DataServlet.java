@@ -27,40 +27,38 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  private final String HTML_Contant_Type = "text/html";
-
-  private final String REDIRECT = "/index.html";
-
+  // Response content type and redirect path
+  private final String HTML_CONTENT_TYPE = "text/html";
+  private final String INDEX_PATH = "/index.html";
+  // The type of entity in database, fields in entity
   private final String ENTITY_TYPE = "comment";
-
-  private final String FIELD_NAME = "name";
-
-  private final String FIELD_TEXT = "text";
-  
+  private final String COMMENT_NAME = "name";
+  private final String COMMENT_TEXT = "text";
+  // The default value for undefined fields
   private final String DEFAULT_VAL = "";
 
   // This method is defined on the other branch
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType(HTML_Contant_Type);
+    response.setContentType(HTML_CONTENT_TYPE);
     response.getWriter().println(DEFAULT_VAL); 
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
-    String name = getParameter(request, FIELD_NAME, DEFAULT_VAL); 
-    String text = getParameter(request, FIELD_TEXT, DEFAULT_VAL);
+    String name = getParameter(request, COMMENT_NAME, DEFAULT_VAL); 
+    String text = getParameter(request, COMMENT_TEXT, DEFAULT_VAL);
 
     // Generate comment entity
     Entity comment = new Entity(ENTITY_TYPE);
-    comment.setProperty(FIELD_NAME, name);
-    comment.setProperty(FIELD_TEXT, text);
+    comment.setProperty(COMMENT_NAME, name);
+    comment.setProperty(COMMENT_TEXT, text);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(comment);
-
-    response.sendRedirect(REDIRECT);
+ 
+    response.sendRedirect(INDEX_PATH);
   }
 
   /**
