@@ -17,15 +17,19 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
-/** Servlet that receives comments from POST requests. */
+/** Servlet that handles GET and POST requests for comments. */
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
+  
+  private final String JSON_CONTENT_TYPE = "application/json";
 
   // Response content type and redirect path
   private final String HTML_CONTENT_TYPE = "text/html";
