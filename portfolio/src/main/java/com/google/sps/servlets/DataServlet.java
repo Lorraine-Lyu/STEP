@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -22,24 +25,55 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-/** Servlet that returns some hard coded strings. */
+/** Servlet that handles GET and POST requests for comments. */
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
-  private final String CONTENT_TYPE = "application/json";
-  private String stringList = "";
+  
+  private final String JSON_CONTENT_TYPE = "application/json";
 
-  /** The temporary constructor which instantiates json array with test string 
-  * NOTE: This constructor will be removed after the servelet connects to database
-  */
-  public DataServlet() {
-    super();
-    stringList = new Gson().toJson(new String[] {"test str1", "test str2", "test str3"});
-  }
+  // Response content type and redirect path
+  private final String HTML_CONTENT_TYPE = "text/html";
+  private final String INDEX_PATH = "/index.html";
+  // The type of entity in database, fields in entity
+  private final String ENTITY_TYPE = "comment";
+  private final String COMMENT_NAME = "name";
+  private final String COMMENT_TEXT = "text";
+  // The default value for undefined fields
+  private final String DEFAULT_VAL = "";
 
-  //Tests sending hardcoded strings to client
+  // This method is defined on the other branch
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType(CONTENT_TYPE);
-    response.getWriter().println(stringList);
+    response.setContentType(HTML_CONTENT_TYPE);
+    response.getWriter().println(DEFAULT_VAL); 
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String name = getParameter(request, COMMENT_NAME, DEFAULT_VAL); 
+    String text = getParameter(request, COMMENT_TEXT, DEFAULT_VAL);
+
+    // Generate comment entity
+    Entity comment = new Entity(ENTITY_TYPE);
+    comment.setProperty(COMMENT_NAME, name);
+    comment.setProperty(COMMENT_TEXT, text);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(comment);
+ 
+    response.sendRedirect(INDEX_PATH);
+  }
+
+  /**
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }
