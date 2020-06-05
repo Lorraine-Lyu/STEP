@@ -15,9 +15,18 @@ body {
   height: 100%;
 }
 
+.field {
+  display: inline-block;
+  margin: 2px 5px 2px 5px;
+  resize: none;
+  outline: none;
+  overflow: auto;
+}
+
 .frame {
   box-shadow: 5px 10px 8px var(--green-dark);
   border: none;
+  float: right;
   margin: auto;
 }
 
@@ -29,7 +38,7 @@ body {
 }
 
 .main {
-  padding: 2% 8% 2% 8%;
+  padding: 2% 4% 2% 4%;
   height: 80%;
 }
 
@@ -37,6 +46,23 @@ body {
   border-bottom: 1px var(--green-dark) solid;
   margin-bottom: 16px;
   padding-bottom: 5px;
+}
+
+#comments {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  float: left;
+  height: 90%;
+  width: 20%;
+}
+
+#comment-box {
+  bottom: 0;
+  box-shadow: 5px 10px 8px var(--green-dark);
+  display: block;
+  height: 12%;
+  margin: auto;
+  position: absolute;
+  width: 80%;
 }
 
 #content {
@@ -62,6 +88,18 @@ body {
   height: 200px;
   padding: 20px;
   width: 200px;
+}
+
+#submit-btn {
+  background-color: var(--green-dark);
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  margin: 5px;
+  padding: 8px 12px;
+  position: absolute;
+  right: 10px;
 }
 
 
