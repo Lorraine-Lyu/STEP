@@ -14,32 +14,49 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /** Servlet that returns some hard coded strings. */
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
+
+  /** The content type of response */
   private final String CONTENT_TYPE = "application/json";
-  private String stringList = "";
 
-  /** The temporary constructor which instantiates json array with test string 
-  * NOTE: This constructor will be removed after the servelet connects to database
-  */
-  public DataServlet() {
-    super();
-    stringList = new Gson().toJson(new String[] {"test str1", "test str2", "test str3"});
-  }
-
-  //Tests sending hardcoded strings to client
+  /** Queries data from datastore and sends to clients */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("comment");
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Comment> tasks = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      String name = (String) entity.getProperty("name");
+      String text = (String) entity.getProperty("text");
+
+      Comment comment = new Comment(name, text);
+      tasks.add(comment);
+    }
+
+    Gson gson = new Gson();
+
     response.setContentType(CONTENT_TYPE);
-    response.getWriter().println(stringList);
+    response.getWriter().println(gson.toJson(tasks));
   }
 }
