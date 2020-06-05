@@ -14,8 +14,9 @@
 
 // Fetches data from servelet when the document is loaded
 window.onload = async () => {
+  let commentResponse = undefined;
   try {
-    const commentResponse = await fetch('/comment');
+    commentResponse = await fetch('/comment');
   } catch (e) {
     alert('Cannot get response');
     console.log(e);
