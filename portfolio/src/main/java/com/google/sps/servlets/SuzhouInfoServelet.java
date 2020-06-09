@@ -26,15 +26,17 @@ public class SuzhouInfoServelet extends HttpServlet {
 
   // Response content type and redirect path
   private final String HTML_CONTENT_TYPE = "text/html";
-  
-  // This method is defined on the other branch
+
+  private final String INTRO_SUZHOU = "<p>This is my hometown, Suzhou.</p>"
+                                    + "<p>It is close to Shanghai, and it has 2000 years of history.</p>"
+                                    + "<p>I spent most of my time here before coming to U.S. for college.</p>"
+                                    + "<p>this picture below is taken in my high school.</p>"
+                                    + "<img src='images/suzhong1.jpg' alt='My High School'>";
+
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(HTML_CONTENT_TYPE);
-    response.getWriter().println("<p>This is my hometown, Suzhou, Jiangsu, China.</p>"); 
-    response.getWriter().println("<p>It is close to Shanghai, and it has 2000 years of history.</p>"); 
-    response.getWriter().println("<p>I spent most of my time here before coming to U.S. for college.</p>"); 
-    response.getWriter().println("<p>And this picture below is taken in my high school.</p>"); 
-    response.getWriter().println("<img src='images/suzhong1.jpg' alt='My High School'>"); 
+    response.getWriter().println(INTRO_SUZHOU); 
   }
 }
