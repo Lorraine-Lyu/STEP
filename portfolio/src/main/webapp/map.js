@@ -27,7 +27,7 @@ const RICE_COORD = {
 
 // The embedded Google Map for my introduction page
 const map = new google.maps.Map(document.getElementById('map'), {
-  center: {MAP_CENTER.lat, MAP_CENTER.lng},
+  center: {lat: MAP_CENTER.lat, lng: MAP_CENTER.lng},
   zoom: 2,
 });
 
@@ -35,7 +35,7 @@ const map = new google.maps.Map(document.getElementById('map'), {
 // Each marker has corresponding onclick event
 // which updates html content in 'intro-by-location' div
 const hometownMarker = new google.maps.Marker({
-  position: {SUZHOU_COORD.lat, SUZHOU_COORD.lng},
+  position: {lat: SUZHOU_COORD.lat, lng: SUZHOU_COORD.lng},
   map: map,
   title: SUZHOU_COORD.title,
 });
@@ -45,7 +45,7 @@ hometownMarker.addListener('click', async () => {
 });
 
 const smithCollegeMarker = new google.maps.Marker({
-  position: {SMITH_COORD.lat, SMITH_COORD.lng},
+  position: {lat: SMITH_COORD.lat, lng: SMITH_COORD.lng},
   map: map,
   title: SMITH_COORD.title,
 });
@@ -55,7 +55,7 @@ smithCollegeMarker.addListener('click', async () => {
 });
 
 const RiceUnivMarker = new google.maps.Marker({
-  position: {RICE_COORD.lat, RICE_COORD.lng},
+  position: {lat: RICE_COORD.lat, lng: RICE_COORD.lng},
   map: map,
   title: RICE_COORD.title,
 });
@@ -71,4 +71,4 @@ RiceUnivMarker.addListener('click', async () => {
 const changeContent = async (path) => {
   let content = await fetch(path);
   document.getElementById('intro-by-place').innerHTML = content;
-}
+};
