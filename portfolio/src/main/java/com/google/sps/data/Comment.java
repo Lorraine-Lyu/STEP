@@ -15,7 +15,7 @@ public class Comment {
 
   /** 
    * Getter of the comment text. 
-   * @return the actual comment
+   * @return the actual comment.
    */
   public String getComment() {
     return this.comment;
@@ -23,7 +23,7 @@ public class Comment {
 
   /** 
    * Getter of person's name who gave the comment.
-   * @return the person's preferred name
+   * @return the person's preferred name.
    */
   public String getUserName() {
     return this.userName;
