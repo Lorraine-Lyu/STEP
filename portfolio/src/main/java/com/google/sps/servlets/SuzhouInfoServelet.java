@@ -26,7 +26,7 @@ public class SuzhouInfoServelet extends HttpServlet {
 
   // Response content type and redirect path
   private final String HTML_CONTENT_TYPE = "text/html";
-
+  
   // This method is defined on the other branch
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
