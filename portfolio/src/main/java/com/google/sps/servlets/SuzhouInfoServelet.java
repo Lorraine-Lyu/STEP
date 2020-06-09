@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/suzhou")
 public class SuzhouInfoServelet extends HttpServlet {
 
-  // Response content type and redirect path
+  // Response content type and redirect path.
   private final String HTML_CONTENT_TYPE = "text/html";
 
   private final String INTRO_SUZHOU = "<p>This is my hometown, Suzhou.</p>"
