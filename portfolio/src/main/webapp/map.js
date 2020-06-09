@@ -1,8 +1,12 @@
+// The embedded Google Map for my introduction page
 const map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 43, lng: 169},
   zoom: 2,
 });
 
+// All markers for locations meaningful to me.
+// Each marker has corresponding onclick event
+// which updates html content in 'intro-by-location' div
 const hometownMarker = new google.maps.Marker({
   position: {lat: 31.293463, lng: 120.666522},
   map: map,
@@ -33,6 +37,10 @@ RiceUnivMarker.addListener('click', async () => {
   changeContent("/rice")
 });
 
+/**
+ * The onclick event handler for all markers
+ * which sends request to backend and for corresponding html.
+ */
 const changeContent = async (path) => {
   let content = await fetch(path);
   document.getElementById('intro-by-place').innerHTML = content;
