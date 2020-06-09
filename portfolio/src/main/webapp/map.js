@@ -69,6 +69,21 @@ RiceUnivMarker.addListener('click', async () => {
  * which sends request to backend and for corresponding html.
  */
 const changeContent = async (path) => {
-  let content = await fetch(path);
-  document.getElementById('intro-by-place').innerHTML = content;
-};
+  let introByPlace;
+  try {
+    introByPlace = await fetch(path);
+  } catch (e) {
+    alert("Can't get requested content from server");
+    console.log(e);
+    return;
+  }  
+  let content;
+  try {
+    content = await introByPlace.text();
+    document.getElementById('intro-by-place').innerHTML = content;
+  } catch (e) {
+    alert("Cannot parse reponse from server.");
+    console.log(e);
+  }
+}
+
