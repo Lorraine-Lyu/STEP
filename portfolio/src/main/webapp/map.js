@@ -1,4 +1,4 @@
-// The coordinates for all markers and their related properties
+// The coordinates for all markers and their related properties.
 const MAP_CENTER = {
   lat: 43,
   lng: 169,
@@ -25,7 +25,7 @@ const RICE_COORD = {
   path: '/rice',
 };
 
-// The embedded Google Map for my introduction page
+// The embedded Google Map for my introduction page.
 const map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: MAP_CENTER.lat, lng: MAP_CENTER.lng},
   zoom: 2,
@@ -33,7 +33,7 @@ const map = new google.maps.Map(document.getElementById('map'), {
 
 // All markers for locations meaningful to me.
 // Each marker has corresponding onclick event
-// which updates html content in 'intro-by-location' div
+// which updates html content in 'intro-by-location' div.
 const hometownMarker = new google.maps.Marker({
   position: {lat: SUZHOU_COORD.lat, lng: SUZHOU_COORD.lng},
   map: map,
@@ -65,7 +65,7 @@ RiceUnivMarker.addListener('click', async () => {
 });
 
 /**
- * The onclick event handler for all markers
+ * The onclick event handler for all markers,
  * which sends request to backend and for corresponding html.
  */
 const changeContent = async (path) => {
