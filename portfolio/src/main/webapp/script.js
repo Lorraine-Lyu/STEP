@@ -22,11 +22,12 @@ window.onload = async () => {
     console.log(e);
     return;
   }
-  
+
   try {
     const jsonArray = await commentResponse.json();
     const comments = jsonArray
-      .map(entry => `<div class='entry'><p> ${entry.name} : ${entry.text}</p></div>`)
+      .map(entry => 
+      `<div class='entry'><p> ${entry.userName} : ${entry.comment}</p></div>`)
       .join('');
     document.getElementById('comments').innerHTML = comments;
   } catch (e) {
