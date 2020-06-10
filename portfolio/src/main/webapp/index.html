@@ -38,12 +38,23 @@
       <div class="main">
         <iframe class="frame" src="main.html" width="76%" height="96%" id="sub-page"></iframe>
         <div id="comments"></div>
+        <p>Hello <span id="username"></span>!</p>
+        <p>click 
+          <button id="change-name" onclick="openNameForm()">here</button>
+          to change your username
+        </p>
+        <div class="form-popup" id="NameForm">
+          <form action="/login" class="form-container">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            <button type="submit" class="submit-btn">Change Name</button>
+            <button type="submit" class="submit-btn cancel" onclick="closeNameForm()">Cancel</button>
+          </form>
+        </div>
         <form action="/comment" method="POST" id="comment-box">
-          <label for="name">Preferred name:</label>
-          <input name="name" class="field" type="text"></input>
-          <label>Comments:</label>
+          <label>Post a comment on my portfolio:</label>
           <textarea name="text" class="field" rows="3" cols="40"></textarea>
-          <input type="submit" id="submit-btn">
+          <input type="submit" class="submit-btn">
         </form>
       </div>
     </div>
