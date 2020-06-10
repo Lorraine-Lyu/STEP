@@ -50,14 +50,6 @@ export default class Controller {
    * to the portfolio webpage.
    */
   static async checkLoginStatus(controller) {
-    let loginStatus = undefined;
-    try {
-      loginStatus = await fetch('/login');
-    } catch(e) {
-      alert('Cannot get login status');
-      console.log(e);
-      return;
-    }
 
     try {
       // statusObj has a boolean to indicate whether the user has logged in;
