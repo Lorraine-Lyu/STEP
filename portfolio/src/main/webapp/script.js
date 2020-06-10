@@ -12,26 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Controller from '/Controller.js'
+
 // Fetches data from servelet when the document is loaded
 window.onload = async () => {
-  let commentResponse = undefined;
-  try {
-    commentResponse = await fetch('/comment');
-  } catch (e) {
-    alert('Cannot get response');
-    console.log(e);
-    return;
-  }
+  const controller = new Controller();
+  await Controller.loadComments(document.getElementById('comments'));
+  await Controller.checkLoginStatus(controller, document);
+}
 
-  try {
-    const jsonArray = await commentResponse.json();
-    const comments = jsonArray
-      .map(entry => 
-      `<div class='entry'><p> ${entry.userName} : ${entry.comment}</p></div>`)
-      .join('');
-    document.getElementById('comments').innerHTML = comments;
-  } catch (e) {
-    alert('Cannot parse response');
-    console.log(e);
-  }
+
+
+
+
+const openNameForm = () => {
+  document.getElementById("myForm").style.display = "block";
+}
+
+const closeNameForm = () => {
+  document.getElementById("myForm").style.display = "none";
 }
