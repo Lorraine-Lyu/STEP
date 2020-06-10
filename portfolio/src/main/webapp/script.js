@@ -14,21 +14,11 @@
 
 import Controller from '/Controller.js'
 
-// Fetches data from servelet when the document is loaded
+// Fetches data from servelet when the document is loaded.
+// Checks whether the user has logged in and if not, get the 
+// login url from backend.
 window.onload = async () => {
-  const controller = new Controller();
+  window.controller = new Controller(document);
   await Controller.loadComments(document.getElementById('comments'));
-  await Controller.checkLoginStatus(controller, document);
-}
-
-
-
-
-
-const openNameForm = () => {
-  document.getElementById("myForm").style.display = "block";
-}
-
-const closeNameForm = () => {
-  document.getElementById("myForm").style.display = "none";
+  await Controller.checkLoginStatus(window.controller, document);
 }
