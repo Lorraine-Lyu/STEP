@@ -30,6 +30,10 @@ body {
   margin: auto;
 }
 
+.hidden-intro {
+  display: none;
+}
+
 .link {
   color: var(--pink-light);
   font-weight: bold;
@@ -46,6 +50,10 @@ body {
   border-bottom: 1px var(--green-dark) solid;
   margin-bottom: 16px;
   padding-bottom: 5px;
+}
+
+.show-intro {
+  display: block;
 }
 
 #comments {
