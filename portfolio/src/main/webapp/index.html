@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="style.css">
     <script src="nav.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
   </head>
   <body>
     <div id="content">
@@ -38,12 +38,7 @@
       <div class="main">
         <iframe class="frame" src="main.html" width="76%" height="96%" id="sub-page"></iframe>
         <div id="comments"></div>
-        <p>Hello <span id="username"></span>!</p>
-        <p>click 
-          <button id="change-name" onclick="openNameForm()">here</button>
-          to change your username
-        </p>
-        <div class="form-popup" id="NameForm">
+        <div class="form-popup" id="NameForm" class="hidden-elem">
           <form action="/login" class="form-container">
             <label for="username">Username:</label>
             <input type="text" name="username" required>
@@ -51,11 +46,22 @@
             <button type="submit" class="submit-btn cancel" onclick="closeNameForm()">Cancel</button>
           </form>
         </div>
-        <form action="/comment" method="POST" id="comment-box">
-          <label>Post a comment on my portfolio:</label>
-          <textarea name="text" class="field" rows="3" cols="40"></textarea>
-          <input type="submit" class="submit-btn">
-        </form>
+        <div id="div-input-comment">
+          <form action="/comment" method="POST" class="hidden-elem" id="form-comment">
+            <p>Hello <span id="username"></span>!</p>
+            <p>click 
+              <button id="change-name" onclick="openNameForm()">here</button>
+              to change your username
+            </p>
+            <label>Post a comment on my portfolio:</label>
+            <textarea name="text" class="field" rows="3" cols="40"></textarea>
+            <input type="submit" class="submit-btn">
+            <p> Click <a href="" id="logout">here</a> to log out</p>
+          </form>
+          <p class="hidden-elem" id="p-login"> 
+              To post a comment, please login <a href="" id="login">here</a>
+          </p>
+        </div>
       </div>
     </div>
   </body>
