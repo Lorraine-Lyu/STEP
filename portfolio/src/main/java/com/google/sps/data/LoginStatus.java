@@ -8,10 +8,12 @@ public class LoginStatus {
 
   private final Boolean isUserLoggedIn;
   private final String helperInfo;
+  private final String logoutUrl;
 
-  public LoginStatus(Boolean status, String info) {
+  public LoginStatus(Boolean status, String info, String url) {
       this.isUserLoggedIn = status;
       this.helperInfo = info;
+      this.logoutUrl = url;
   }
 
   /** 
@@ -28,5 +30,13 @@ public class LoginStatus {
    */
   public String getHelperInfo() {
     return this.helperInfo;
+  }
+
+  /** 
+   * Getter of logout url.
+   * @return the url user to logout.
+   */
+  public String getLogoutUrl() {
+    return this.logoutUrl;
   }
 }
