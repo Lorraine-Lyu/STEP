@@ -22,15 +22,18 @@ export default class Controller {
    * Loads all comments from backend.
    * This function is called when the page is loaded.
    * @param {HTML div object} commentBox The div in document with id "comment-box"
+   * @param {HTML template} commentCell The template for one comment
    */
-  static async loadComments(commentBox) {
+  static async loadComments(commentBox, commentCell) {
     try {
       let commentArray = await CommentHandler.loadComments();
       let comments = commentArray
-        .map(entry => 
-        `<div class='entry'><p> ${entry.userName} : ${entry.comment}</p></div>`)
-        .join('');
-      commentBox.innerHTML = comments;
+        .map(entry => {
+          let clone = commentCell.content.cloneNode(true);
+          clone.getElementById('guest-name').textContent = entry.userName;
+          clone.getElementById('guest-comment').textContent = entry.comment;
+          commentBox.appendChild(clone);
+        });
     } catch (e) {
       alert('Cannot get response from /comment');
       console.log(e);
