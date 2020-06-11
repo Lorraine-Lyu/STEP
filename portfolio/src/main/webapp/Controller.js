@@ -10,7 +10,6 @@ export default class Controller {
   }
 
   openNameForm() {
-    console.log("open form");
     this.document.getElementById('NameForm').classList.remove('hidden-elem');
   }
 
@@ -24,7 +23,6 @@ export default class Controller {
    * @param {HTML div object} commentBox The div in document with id "comment-box"
    */
   static async loadComments(commentBox) {
-
     try {
       let commentArray = await CommentHandler.loadComments();
       let comments = commentArray
