@@ -1,4 +1,5 @@
 import CommentHandler from '/CommentHandler.js';
+import UserHandler from '/UserHandler.js';
 
 export default class Controller {
 
@@ -30,7 +31,7 @@ export default class Controller {
         .join('');
       commentBox.innerHTML = comments;
     } catch (e) {
-      alert('Cannot parse response');
+      alert('Cannot get response from /comment');
       console.log(e);
     }
   }
@@ -43,19 +44,11 @@ export default class Controller {
    * to the portfolio webpage.
    */
   static async checkLoginStatus(controller) {
-    let loginStatus = undefined;
-    try {
-      loginStatus = await fetch('/login');
-    } catch(e) {
-      alert('Cannot get login status');
-      console.log(e);
-      return;
-    }
 
     try {
       // statusObj has a boolean to indicate whether the user has logged in;
       // and a helperInfo string which can either be username or login url.
-      const statusObj = await loginStatus.json();
+      let statusObj = await UserHandler.loadLoginStatus();
       if (statusObj.isUserLoggedIn) {
         controller.username = statusObj.helperInfo;
         controller.document.getElementById('form-comment').classList.remove('hidden-elem');
@@ -70,7 +63,7 @@ export default class Controller {
       }
       controller.loggedIn = statusObj.isUserLoggedIn;
     } catch(e) {
-      alert('Cannot parse response');
+      alert('Cannot get response from /login');
       console.log(e);
     }
   }
