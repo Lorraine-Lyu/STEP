@@ -20,6 +20,6 @@ import Controller from '/Controller.js'
 window.onload = async () => {
   window.controller = new Controller(document);
   await Controller.loadComments(document.getElementById('comments'), 
-                                document.getElementById('#comment-cell'));
+                                document.getElementById('comment-cell'));
   await Controller.checkLoginStatus(window.controller);
 }
