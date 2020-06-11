@@ -1,3 +1,5 @@
+import CommentHandler from '/CommentHandler.js';
+
 export default class Controller {
 
   constructor(document) {
@@ -22,8 +24,8 @@ export default class Controller {
   static async loadComments(commentBox) {
 
     try {
-      const jsonArray = await commentResponse.json();
-      const comments = jsonArray
+      let commentArray = await CommentHandler.loadComments();
+      let comments = commentArray
         .map(entry => 
         `<div class='entry'><p> ${entry.userName} : ${entry.comment}</p></div>`)
         .join('');
