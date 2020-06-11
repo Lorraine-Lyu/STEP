@@ -49,11 +49,15 @@ export default class Controller {
       const statusObj = await loginStatus.json();
       if (statusObj.isUserLoggedIn) {
         controller.username = statusObj.helperInfo;
+        controller.document.getElementById('form-comment').classList.remove('hidden-elem');
         controller.document.getElementById('username').textContent = controller.username;
+        controller.document.getElementById('logout').href = statusObj.logoutUrl;
+        controller.document.getElementById('p-login').classList.add('hidden-elem');
       } else {
         let loginUrl = statusObj.helperInfo;
-        controller.document.getElementById('comment-box').innerHTML = 
-            '<p> please log in <a href="' + loginUrl + '"> here</a>';
+        controller.document.getElementById('form-comment').classList.add('hidden-elem');
+        controller.document.getElementById('p-login').classList.remove('hidden-elem');
+        controller.document.getElementById('login').href = loginUrl;
       }
       controller.loggedIn = statusObj.isUserLoggedIn;
     } catch(e) {
