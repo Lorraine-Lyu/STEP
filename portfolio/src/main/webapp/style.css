@@ -16,7 +16,9 @@ body {
 }
 
 .field {
-  display: inline-block;
+  border: none;
+  background-color: var(--green-light);
+  display: block;
   margin: 2px 5px 2px 5px;
   resize: none;
   outline: none;
@@ -26,7 +28,7 @@ body {
 .frame {
   box-shadow: 5px 10px 8px var(--green-dark);
   border: none;
-  float: right;
+  float: left;
   margin: auto;
 }
 
@@ -58,19 +60,19 @@ body {
 
 #comments {
   box-shadow: 5px 10px 8px var(--green-dark);
-  float: left;
-  height: 90%;
+  float: right;
+  height: 65%;
+  margin-right: 2%;
   width: 20%;
 }
 
 #comment-box {
-  bottom: 0;
   box-shadow: 5px 10px 8px var(--green-dark);
   display: block;
-  height: 12%;
-  margin: auto;
-  position: absolute;
-  width: 80%;
+  float: right;
+  height: 30%;
+  margin-right: 2%;
+  width: 20%;
 }
 
 #content {
@@ -106,13 +108,11 @@ body {
 #submit-btn {
   background-color: var(--green-dark);
   border: none;
-  color: white;
-  display: inline-block;
-  font-size: 14px;
-  margin: 5px;
-  padding: 8px 12px;
-  position: absolute;
-  right: 10px;
+  color: var(--green-light);
+  display: block;
+  font-size: 12px;
+  margin: auto;
+  padding: 4px 15px;
 }
 
 
