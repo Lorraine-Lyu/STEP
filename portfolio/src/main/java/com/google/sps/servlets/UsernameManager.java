@@ -37,21 +37,24 @@ public class UsernameManager extends HttpServlet {
   private final String INDEX_PATH = "/";
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private final Gson gson = new Gson();
-  private final UserService userService = UserServiceFactory.getUserService();
+  
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
     response.setContentType(JSON_CONTENT_TYPE);
     PrintWriter out = response.getWriter();
-
     String helperInfo = userService.isUserLoggedIn() 
-                      ? getUsername(userService.getCurrentUser().getUserId())
+                    ? userService.getCurrentUser().getEmail()
+                    //   ? getUsername(userService.getCurrentUser().getUserId())
                       : userService.createLoginURL(INDEX_PATH);
-    out.println(gson.toJson(new LoginStatus(userService.isUserLoggedIn(), helperInfo)));
+    String logoutUrl = userService.createLogoutURL(INDEX_PATH);
+    out.println(gson.toJson(new LoginStatus(userService.isUserLoggedIn(), helperInfo, logoutUrl)));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect(INDEX_PATH);
       return;
