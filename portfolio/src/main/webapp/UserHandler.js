@@ -1,3 +1,4 @@
+/** The class which checks user's login status */
 export default class UserHandler {
   
   static async loadLoginStatus() {
