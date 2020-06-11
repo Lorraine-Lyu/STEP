@@ -10,11 +10,12 @@ export default class Controller {
   }
 
   openNameForm() {
-    // pops up the form with id "nameForm".
+    console.log("open form");
+    this.document.getElementById('NameForm').classList.remove('hidden-elem');
   }
 
   closeNameForm() {
-    // hides the form with id "nameForm".
+    this.document.getElementById('NameForm').classList.add('hidden-elem');
   }
 
   /**
