@@ -19,6 +19,7 @@ import Controller from '/Controller.js'
 // login url from backend.
 window.onload = async () => {
   window.controller = new Controller(document);
-  await Controller.loadComments(document.getElementById('comments'));
+  await Controller.loadComments(document.getElementById('comments'), 
+                                document.getElementById('#comment-cell'));
   await Controller.checkLoginStatus(window.controller);
 }
