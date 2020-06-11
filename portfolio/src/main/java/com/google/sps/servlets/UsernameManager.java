@@ -35,26 +35,32 @@ public class UsernameManager extends HttpServlet {
 
   private final String JSON_CONTENT_TYPE = "application/json";
   private final String INDEX_PATH = "/";
+  // The object which connects to GCP datastore.
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  // The object which converts Java to Json.
   private final Gson gson = new Gson();
+  // The object which does user login/logout
+  private final UserService userService = UserServiceFactory.getUserService();
   
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
+
     response.setContentType(JSON_CONTENT_TYPE);
     PrintWriter out = response.getWriter();
+    // If the user has logged in, send the pre-registered username to client,
+    // if not, send the login url.
     String helperInfo = userService.isUserLoggedIn() 
-                    ? userService.getCurrentUser().getEmail()
-                    //   ? getUsername(userService.getCurrentUser().getUserId())
+                      ? getUsername(userService.getCurrentUser().getUserId())
                       : userService.createLoginURL(INDEX_PATH);
+    // Always send the logout url to client.
     String logoutUrl = userService.createLogoutURL(INDEX_PATH);
     out.println(gson.toJson(new LoginStatus(userService.isUserLoggedIn(), helperInfo, logoutUrl)));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
+
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect(INDEX_PATH);
       return;
