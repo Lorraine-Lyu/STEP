@@ -20,5 +20,5 @@ import Controller from '/Controller.js'
 window.onload = async () => {
   window.controller = new Controller(document);
   await Controller.loadComments(document.getElementById('comments'));
-  await Controller.checkLoginStatus(window.controller, document);
+  await Controller.checkLoginStatus(window.controller);
 }
