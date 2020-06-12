@@ -11,11 +11,11 @@ export default class Controller {
 
   openNameForm() {
     console.log("open form");
-    this.document.getElementById('NameForm').classList.remove('hidden-elem');
+    this.document.getElementById('name-form').classList.remove('hidden-elem');
   }
 
   closeNameForm() {
-    this.document.getElementById('NameForm').classList.add('hidden-elem');
+    this.document.getElementById('name-form').classList.add('hidden-elem');
   }
 
   /**
@@ -53,17 +53,19 @@ export default class Controller {
       // statusObj has a boolean to indicate whether the user has logged in;
       // and a helperInfo string which can either be username or login url.
       let statusObj = await UserHandler.loadLoginStatus();
+      let doc = controller.document;
       if (statusObj.isUserLoggedIn) {
         controller.username = statusObj.helperInfo;
-        controller.document.getElementById('form-comment').classList.remove('hidden-elem');
-        controller.document.getElementById('username').textContent = controller.username;
-        controller.document.getElementById('logout').href = statusObj.logoutUrl;
-        controller.document.getElementById('p-login').classList.add('hidden-elem');
+        doc.getElementById('form-comment').classList.remove('hidden-elem');
+        doc.getElementById('username').textContent = controller.username;
+        doc.getElementById('hidden-username').value = controller.username;
+        doc.getElementById('logout').href = statusObj.logoutUrl;
+        doc.getElementById('p-login').classList.add('hidden-elem');
       } else {
         let loginUrl = statusObj.helperInfo;
-        controller.document.getElementById('form-comment').classList.add('hidden-elem');
-        controller.document.getElementById('p-login').classList.remove('hidden-elem');
-        controller.document.getElementById('login').href = loginUrl;
+        doc.getElementById('form-comment').classList.add('hidden-elem');
+        doc.getElementById('p-login').classList.remove('hidden-elem');
+        doc.getElementById('login').href = loginUrl;
       }
       controller.loggedIn = statusObj.isUserLoggedIn;
     } catch(e) {
