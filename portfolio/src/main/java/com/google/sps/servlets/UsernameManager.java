@@ -14,14 +14,12 @@
 
 package com.google.sps.servlets;
 
+import static com.google.sps.data.ConstantProperties.*;
+
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-import com.google.gson.Gson;
 import com.google.sps.data.LoginStatus;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,15 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/login")
 public class UsernameManager extends HttpServlet {
 
-  private final String JSON_CONTENT_TYPE = "application/json";
-  private final String INDEX_PATH = "/";
-  // The object which connects to GCP datastore.
-  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  // The object which converts Java to Json.
-  private final Gson gson = new Gson();
-  // The object which does user login/logout
-  private final UserService userService = UserServiceFactory.getUserService();
-  
+  private static final String USER_INFO = "UserInfo";
+  private static final String USER_ID = "id";
+  private static final String USER_NAME = "username";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -66,13 +58,12 @@ public class UsernameManager extends HttpServlet {
       return;
     }
 
-    String username = request.getParameter("username");
+    String username = request.getParameter(USER_NAME);
     String id = userService.getCurrentUser().getUserId();
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Entity entity = new Entity("UserInfo", id);
-    entity.setProperty("id", id);
-    entity.setProperty("username", username);
+    Entity entity = new Entity(USER_INFO, id);
+    entity.setProperty(USER_ID, id);
+    entity.setProperty(USER_NAME, username);
     // The put() function automatically inserts new data or updates existing data based on ID.
     datastore.put(entity);
 
@@ -84,14 +75,14 @@ public class UsernameManager extends HttpServlet {
    */
   private String getUsername(String id) {
     Query query =
-        new Query("UserInfo")
-            .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
+        new Query(USER_INFO)
+            .setFilter(new Query.FilterPredicate(USER_ID, Query.FilterOperator.EQUAL, id));
     PreparedQuery results = datastore.prepare(query);
     Entity entity = results.asSingleEntity();
     if (entity == null) {
-      return "";
+      return DEFAULT_VAL;
     }
-    String name = (String) entity.getProperty("username");
+    String name = (String) entity.getProperty(USER_NAME);
     return name;
   }
 }
