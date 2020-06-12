@@ -34,7 +34,7 @@ public class LoginStatus {
 
   /** 
    * Getter of logout url.
-   * @return the url user to logout.
+   * @return the url for user to logout.
    */
   public String getLogoutUrl() {
     return this.logoutUrl;
