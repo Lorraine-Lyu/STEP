@@ -34,7 +34,7 @@ import java.util.List;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  // The type of entity in database, fields in entity.
+  // The type of entity in database and fields in entity.
   private static final String ENTITY_TYPE = "comment";
   private static final String COMMENT_NAME = "name";
   private static final String COMMENT_TEXT = "text";
@@ -55,6 +55,9 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
+   * @param request       The current HTTP request being handled
+   * @param name          The parameter name
+   * @param defaultValue  The default string if the field does not exist in request
    * @return the request parameter, or the default value if the parameter
    *         was not specified by the client.
    */

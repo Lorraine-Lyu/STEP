@@ -71,7 +71,8 @@ public class UsernameManager extends HttpServlet {
   }
 
   /**
-   * Returns the username of the user with id, or empty String if the user has not set a username.
+   * @param id The string id of current user
+   * @return the username of the user, or empty String if the user has not set a username.
    */
   private String getUsername(String id) {
     Query query =
