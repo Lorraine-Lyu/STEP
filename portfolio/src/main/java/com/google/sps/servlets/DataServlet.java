@@ -14,13 +14,13 @@
 
 package com.google.sps.servlets;
 
+import static com.google.sps.data.ConstantProperties.*;
+
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -34,20 +34,10 @@ import java.util.List;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  // Response content type and redirect path.
-  private final String HTML_CONTENT_TYPE = "text/html";
-  private final String JSON_CONTENT_TYPE = "application/json";
-  private final String INDEX_PATH = "/index.html";
   // The type of entity in database, fields in entity.
-  private final String ENTITY_TYPE = "comment";
-  private final String COMMENT_NAME = "name";
-  private final String COMMENT_TEXT = "text";
-  // The default value for undefined fields.
-  private final String DEFAULT_VAL = "";
-  // The object connected to datastore.
-  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  // The Java to JSON converter.
-  Gson gson = new Gson();
+  private static final String ENTITY_TYPE = "comment";
+  private static final String COMMENT_NAME = "name";
+  private static final String COMMENT_TEXT = "text";
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
