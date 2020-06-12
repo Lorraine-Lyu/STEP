@@ -9,11 +9,13 @@ export default class Controller {
     this.document = document;
   }
 
+  /** Shows the change name form*/
   openNameForm() {
     console.log("open form");
     this.document.getElementById('name-form').classList.remove('hidden-elem');
   }
 
+  /** Hides the change name form*/
   closeNameForm() {
     this.document.getElementById('name-form').classList.add('hidden-elem');
   }
