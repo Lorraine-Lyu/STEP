@@ -11,7 +11,6 @@ export default class Controller {
 
   /** Shows the change name form*/
   openNameForm() {
-    console.log("open form");
     this.document.getElementById('name-form').classList.remove('hidden-elem');
   }
 
