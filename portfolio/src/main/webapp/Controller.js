@@ -4,19 +4,27 @@ import UserHandler from '/UserHandler.js';
 export default class Controller {
 
   constructor(document) {
-    this.username = undefined;
-    this.loggedIn = false;
-    this.document = document;
+    this.username_ = undefined;
+    this.loggedIn_ = false;
+    this.document_ = document;
+    this.commentHandler_ = new CommentHandler();
+    this.userHandler_ = new UserHandler();
+  }
+
+  async init() {
+    await this.loadComments_(this.document_.getElementById('comments'), 
+                       this.document_.getElementById('comment-cell'));
+    await this.checkLoginStatus_();
   }
 
   /** Shows the change name form*/
   openNameForm() {
-    this.document.getElementById('name-form').classList.remove('hidden-elem');
+    this.document_.getElementById('name-form').classList.remove('hidden-elem');
   }
 
   /** Hides the change name form*/
   closeNameForm() {
-    this.document.getElementById('name-form').classList.add('hidden-elem');
+    this.document_.getElementById('name-form').classList.add('hidden-elem');
   }
 
   /**
@@ -25,7 +33,7 @@ export default class Controller {
    * @param {HTML div object} commentBox The div in document with id "comment-box"
    * @param {HTML template} commentCell The template for one comment
    */
-  static async loadComments(commentBox, commentCell) {
+  async loadComments_(commentBox, commentCell) {
     try {
       let commentArray = await CommentHandler.loadComments();
       let comments = commentArray
@@ -39,7 +47,7 @@ export default class Controller {
       alert('Cannot get response from /comment');
       console.log(e);
     }
-  }
+  };
 
   /**
    * Checks whether the user has logged in;
@@ -48,15 +56,15 @@ export default class Controller {
    * @param {Controller} controller the controller connected 
    * to the portfolio webpage.
    */
-  static async checkLoginStatus(controller) {
+   async checkLoginStatus_() {
 
     try {
       // statusObj has a boolean to indicate whether the user has logged in;
       // and a helperInfo string which can either be username or login url.
       let statusObj = await UserHandler.loadLoginStatus();
-      let doc = controller.document;
+      let doc = this.document_;
       if (statusObj.isUserLoggedIn) {
-        controller.username = statusObj.helperInfo;
+        this.username_ = statusObj.helperInfo;
         doc.getElementById('form-comment').classList.remove('hidden-elem');
         doc.getElementById('username').textContent = controller.username;
         doc.getElementById('hidden-username').value = controller.username;
@@ -68,10 +76,10 @@ export default class Controller {
         doc.getElementById('p-login').classList.remove('hidden-elem');
         doc.getElementById('login').href = loginUrl;
       }
-      controller.loggedIn = statusObj.isUserLoggedIn;
+      this.loggedIn_ = statusObj.isUserLoggedIn;
     } catch(e) {
       alert('Cannot get response from /login');
       console.log(e);
     }
-  }
+  };
 }
