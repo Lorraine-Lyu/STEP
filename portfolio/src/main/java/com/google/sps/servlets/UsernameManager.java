@@ -33,6 +33,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @WebServlet("/login")
 public class UsernameManager extends HttpServlet {
@@ -43,23 +44,27 @@ public class UsernameManager extends HttpServlet {
   // The object connected to datastore.
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The object which does user login/logout.
-  public static final UserService userService = UserServiceFactory.getUserService();
+  private static final UserService userService = UserServiceFactory.getUserService();
   // The Java to JSON converter.
-  public static final Gson gson = new Gson();
+  private static final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     response.setContentType(JSON_CONTENT_TYPE);
     PrintWriter out = response.getWriter();
-    // If the user has logged in, send the pre-registered username to client,
-    // if not, send the login url.
-    String helperInfo = userService.isUserLoggedIn() 
-                      ? getUsername(userService.getCurrentUser().getUserId())
-                      : userService.createLoginURL(INDEX_PATH);
+    // If the user has logged in, get the pre-registered username,
+    // if not, get the login url.
+    Optional<String> loginUrl = userService.isUserLoggedIn() 
+                      ? Optional.empty()
+                      : Optional.of(userService.createLoginURL(INDEX_PATH));
+    Optional<String> username = userService.isUserLoggedIn()
+                              ? Optional.of(getUsername(userService.getCurrentUser().getUserId()))
+                              : Optional.empty();
     // Always send the logout url to client.
     String logoutUrl = userService.createLogoutURL(INDEX_PATH);
-    out.println(gson.toJson(new LoginStatus(userService.isUserLoggedIn(), helperInfo, logoutUrl)));
+    out.println(
+        gson.toJson(new LoginStatus(userService.isUserLoggedIn(), loginUrl, logoutUrl, username)));
   }
 
   @Override
