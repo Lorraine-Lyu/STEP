@@ -5,6 +5,7 @@ export default class UserHandler {
    * If user has logged in, show the commentbox and username;
    * if not, show the log in url.
    * @param {Controller} controller The Controller of current webapp
+   * @private
    */
   async loadLoginStatus_(controller) {
     let loginStatus = undefined;

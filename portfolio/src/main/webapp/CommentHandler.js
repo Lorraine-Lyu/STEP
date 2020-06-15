@@ -4,6 +4,7 @@ export default class CommentHandler {
    * This function is called when the page is loaded.
    * @param {HTML div object} commentBox The div in document with id "comment-box"
    * @param {HTML template} commentCell The template for one comment
+   * @private
    */
   async loadComments_(commentBox, commentCell) {
     let commentResponse = undefined;
