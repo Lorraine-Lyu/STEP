@@ -13,16 +13,16 @@ export default class Controller {
 
   async init() {
     await this.loadComments_(this.document_.getElementById('comments'), 
-                       this.document_.getElementById('comment-cell'));
+                             this.document_.getElementById('comment-cell'));
     await this.checkLoginStatus_();
   }
 
-  /** Shows the change name form*/
+  /** Shows the change name form. */
   openNameForm() {
     this.document_.getElementById('name-form').classList.remove('hidden-elem');
   }
 
-  /** Hides the change name form*/
+  /** Hides the change name form. */
   closeNameForm() {
     this.document_.getElementById('name-form').classList.add('hidden-elem');
   }
@@ -32,6 +32,7 @@ export default class Controller {
    * This function is called when the page is loaded.
    * @param {HTML div object} commentBox The div in document with id "comment-box"
    * @param {HTML template} commentCell The template for one comment
+   * @private
    */
   async loadComments_(commentBox, commentCell) {
       
@@ -48,6 +49,7 @@ export default class Controller {
    * if so, gets the username;
    * if not, gets the login url.
    * to the portfolio webpage.
+   * @private
    */
    async checkLoginStatus_() {
 
