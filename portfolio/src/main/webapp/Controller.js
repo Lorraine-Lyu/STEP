@@ -34,15 +34,9 @@ export default class Controller {
    * @param {HTML template} commentCell The template for one comment
    */
   async loadComments_(commentBox, commentCell) {
+      
     try {
-      let commentArray = await CommentHandler.loadComments();
-      let comments = commentArray
-        .map(entry => {
-          let clone = commentCell.content.cloneNode(true);
-          clone.getElementById('guest-name').textContent = entry.userName;
-          clone.getElementById('guest-comment').textContent = entry.comment;
-          commentBox.appendChild(clone);
-        });
+      await this.commentHandler_.loadComments_(commentBox, commentCell);
     } catch (e) {
       alert('Cannot get response from /comment');
       console.log(e);
@@ -53,30 +47,12 @@ export default class Controller {
    * Checks whether the user has logged in;
    * if so, gets the username;
    * if not, gets the login url.
-   * @param {Controller} controller the controller connected 
    * to the portfolio webpage.
    */
    async checkLoginStatus_() {
 
     try {
-      // statusObj has a boolean to indicate whether the user has logged in;
-      // and a helperInfo string which can either be username or login url.
-      let statusObj = await UserHandler.loadLoginStatus();
-      let doc = this.document_;
-      if (statusObj.isUserLoggedIn) {
-        this.username_ = statusObj.helperInfo;
-        doc.getElementById('form-comment').classList.remove('hidden-elem');
-        doc.getElementById('username').textContent = controller.username;
-        doc.getElementById('hidden-username').value = controller.username;
-        doc.getElementById('logout').href = statusObj.logoutUrl;
-        doc.getElementById('p-login').classList.add('hidden-elem');
-      } else {
-        let loginUrl = statusObj.helperInfo;
-        doc.getElementById('form-comment').classList.add('hidden-elem');
-        doc.getElementById('p-login').classList.remove('hidden-elem');
-        doc.getElementById('login').href = loginUrl;
-      }
-      this.loggedIn_ = statusObj.isUserLoggedIn;
+      await this.userHandler_.loadLoginStatus_(this);
     } catch(e) {
       alert('Cannot get response from /login');
       console.log(e);
