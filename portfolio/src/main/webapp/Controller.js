@@ -11,6 +11,7 @@ export default class Controller {
     this.userHandler_ = new UserHandler();
   }
 
+  /** Fetches comments and user's account information from server. */
   async init() {
     await this.loadComments_(this.document_.getElementById('comments'), 
                              this.document_.getElementById('comment-cell'));
