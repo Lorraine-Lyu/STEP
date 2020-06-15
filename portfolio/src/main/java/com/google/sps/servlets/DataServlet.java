@@ -14,13 +14,17 @@
 
 package com.google.sps.servlets;
 
-import static com.google.sps.data.ConstantProperties.*;
+import static com.google.sps.data.ConstantValues.DEFAULT_VAL;
+import static com.google.sps.data.ConstantValues.INDEX_PATH;
+import static com.google.sps.data.ConstantValues.JSON_CONTENT_TYPE;
 
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +42,10 @@ public class DataServlet extends HttpServlet {
   private static final String ENTITY_TYPE = "comment";
   private static final String COMMENT_NAME = "name";
   private static final String COMMENT_TEXT = "text";
+  // The object connected to datastore.
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  // The Java to JSON converter.
+  public static final Gson gson = new Gson();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -14,12 +14,18 @@
 
 package com.google.sps.servlets;
 
-import static com.google.sps.data.ConstantProperties.*;
+import static com.google.sps.data.ConstantValues.DEFAULT_VAL;
+import static com.google.sps.data.ConstantValues.INDEX_PATH;
+import static com.google.sps.data.ConstantValues.JSON_CONTENT_TYPE;
 
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
 import com.google.sps.data.LoginStatus;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +40,12 @@ public class UsernameManager extends HttpServlet {
   private static final String USER_INFO = "UserInfo";
   private static final String USER_ID = "id";
   private static final String USER_NAME = "username";
+  // The object connected to datastore.
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  // The object which does user login/logout
+  public static final UserService userService = UserServiceFactory.getUserService();
+  // The Java to JSON converter.
+  public static final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
