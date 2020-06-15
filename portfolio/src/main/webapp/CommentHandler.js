@@ -10,14 +10,8 @@ export default class CommentHandler {
     let commentResponse = undefined;
     try {
       commentResponse = await fetch('/comment');
-    } catch (e) {
-      throw e;
-      return;
-    }
-
-    try {
       const commentArray = await commentResponse.json();
-      let comments = commentArray
+      commentArray
         .map(entry => {
           let clone = commentCell.content.cloneNode(true);
           clone.getElementById('guest-name').textContent = entry.userName;

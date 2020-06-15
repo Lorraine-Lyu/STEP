@@ -11,12 +11,6 @@ export default class UserHandler {
     let loginStatus = undefined;
     try {
       loginStatus = await fetch('/login');
-    } catch(e) {
-      throw e;
-      return;
-    }
-
-    try {
       // statusObj has a boolean to indicate whether the user has logged in;
       // and a helperInfo string which can either be username or login url.
       let statusObj = await loginStatus.json();
@@ -35,7 +29,6 @@ export default class UserHandler {
         doc.getElementById('login').href = loginUrl;
       }
       controller.loggedIn_ = statusObj.isUserLoggedIn;
-      return statusObj;
     } catch(e) {
       throw e;
     }
