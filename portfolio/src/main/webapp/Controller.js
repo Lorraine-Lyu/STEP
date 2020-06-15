@@ -4,20 +4,28 @@ import UserHandler from '/UserHandler.js';
 export default class Controller {
 
   constructor(document) {
-    this.username = undefined;
-    this.loggedIn = false;
-    this.document = document;
+    this.username_ = undefined;
+    this.loggedIn_ = false;
+    this.document_ = document;
+    this.commentHandler_ = new CommentHandler();
+    this.userHandler_ = new UserHandler();
   }
 
-  /** Shows the change name form*/
+  /** Fetches comments and user's account information from server. */
+  async init() {
+    await this.loadComments_(this.document_.getElementById('comments'), 
+                             this.document_.getElementById('comment-cell'));
+    await this.checkLoginStatus_();
+  }
+
+  /** Shows the change name form. */
   openNameForm() {
-    console.log("open form");
-    this.document.getElementById('name-form').classList.remove('hidden-elem');
+    this.document_.getElementById('name-form').classList.remove('hidden-elem');
   }
 
-  /** Hides the change name form*/
+  /** Hides the change name form. */
   closeNameForm() {
-    this.document.getElementById('name-form').classList.add('hidden-elem');
+    this.document_.getElementById('name-form').classList.add('hidden-elem');
   }
 
   /**
@@ -25,17 +33,11 @@ export default class Controller {
    * This function is called when the page is loaded.
    * @param {HTML div object} commentBox The div in document with id "comment-box"
    * @param {HTML template} commentCell The template for one comment
+   * @private
    */
-  static async loadComments(commentBox, commentCell) {
+  async loadComments_(commentBox, commentCell) { 
     try {
-      let commentArray = await CommentHandler.loadComments();
-      let comments = commentArray
-        .map(entry => {
-          let clone = commentCell.content.cloneNode(true);
-          clone.getElementById('guest-name').textContent = entry.userName;
-          clone.getElementById('guest-comment').textContent = entry.comment;
-          commentBox.appendChild(clone);
-        });
+      await this.commentHandler_.loadComments_(commentBox, commentCell);
     } catch (e) {
       alert('Cannot get response from /comment');
       console.log(e);
@@ -46,30 +48,12 @@ export default class Controller {
    * Checks whether the user has logged in;
    * if so, gets the username;
    * if not, gets the login url.
-   * @param {Controller} controller the controller connected 
    * to the portfolio webpage.
+   * @private
    */
-  static async checkLoginStatus(controller) {
-
+   async checkLoginStatus_() {
     try {
-      // statusObj has a boolean to indicate whether the user has logged in;
-      // and a helperInfo string which can either be username or login url.
-      let statusObj = await UserHandler.loadLoginStatus();
-      let doc = controller.document;
-      if (statusObj.isUserLoggedIn) {
-        controller.username = statusObj.helperInfo;
-        doc.getElementById('form-comment').classList.remove('hidden-elem');
-        doc.getElementById('username').textContent = controller.username;
-        doc.getElementById('hidden-username').value = controller.username;
-        doc.getElementById('logout').href = statusObj.logoutUrl;
-        doc.getElementById('p-login').classList.add('hidden-elem');
-      } else {
-        let loginUrl = statusObj.helperInfo;
-        doc.getElementById('form-comment').classList.add('hidden-elem');
-        doc.getElementById('p-login').classList.remove('hidden-elem');
-        doc.getElementById('login').href = loginUrl;
-      }
-      controller.loggedIn = statusObj.isUserLoggedIn;
+      await this.userHandler_.loadLoginStatus_(this);
     } catch(e) {
       alert('Cannot get response from /login');
       console.log(e);
