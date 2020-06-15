@@ -42,7 +42,7 @@ public class UsernameManager extends HttpServlet {
   private static final String USER_NAME = "username";
   // The object connected to datastore.
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  // The object which does user login/logout
+  // The object which does user login/logout.
   public static final UserService userService = UserServiceFactory.getUserService();
   // The Java to JSON converter.
   public static final Gson gson = new Gson();
