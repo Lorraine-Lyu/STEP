@@ -13,7 +13,8 @@ public class LoginStatus {
   private final String logoutUrl;
   private final Optional<String> username;
 
-  public LoginStatus(boolean isUserLoggedIn, Optional<String> loginUrl, String logoutUrl, Optional<String> username) {
+  public LoginStatus(boolean isUserLoggedIn, Optional<String> loginUrl, 
+                     String logoutUrl, Optional<String> username) {
       this.isUserLoggedIn = isUserLoggedIn;
       this.loginUrl = loginUrl;
       this.logoutUrl = logoutUrl;
@@ -30,7 +31,7 @@ public class LoginStatus {
 
   /** 
    * Getter of the login url.
-   * @return the url for login.
+   * @return a optional of string which is the login url.
    */
   public Optional<String> getLoginUrl() {
     return this.loginUrl;
@@ -38,7 +39,7 @@ public class LoginStatus {
 
   /** 
    * Getter of logout url.
-   * @return the url for user to logout.
+   * @return the url string for user to logout.
    */
   public String getLogoutUrl() {
     return this.logoutUrl;
@@ -46,7 +47,7 @@ public class LoginStatus {
 
   /** 
    * Getter of username.
-   * @return the username of current user.
+   * @return an optional of string username of current user.
    */
   public Optional<String> getusername() {
     return this.username;
