@@ -1,34 +1,31 @@
 import CommentHandler from '/CommentHandler.js';
 import UserHandler from '/UserHandler.js';
 
+/**
+ * The adapter class which delegates actions required from view to 
+ * different service modules.
+ */
 export default class Controller {
 
   constructor(document) {
     /** 
-     * @member {String} username_ 
-     * current user's username 
-     * @private
+     * @private @type {string} the string of current user's username 
      */
     this.username_ = undefined;
     /** 
-     * @member {bool} loggedIn_ 
-     * whether the user has logged in 
-     * @private
+     * @private @type {bool} the boolean indicating whether the user has logged in 
      */
     this.loggedIn_ = false;
     /** 
-     * @member {HTML document} document_ 
-     * @private
+     * @private @type {HTML document} 
      */
     this.document_ = document;
     /** 
-     * @member {CommentHandler} commentHandler_  
-     * @private
+     * @private @type {CommentHandler}  
      */
     this.commentHandler_ = new CommentHandler();
     /** 
-     * @member {UserHandler} userHandler_  
-     * @private
+     * @private @type {UserHandler} 
      */
     this.userHandler_ = new UserHandler();
   }

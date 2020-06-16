@@ -1,9 +1,10 @@
+/** The class in charge of comment loading. */
 export default class CommentHandler {
   /**
    * Loads all comments from backend.
    * This function is called when the page is loaded.
-   * @param {HTML div object} commentBox The div in document with id "comment-box"
-   * @param {HTML template} commentCell The template for one comment
+   * @param {HTML div object} commentBox The div in document with id "comment-box".
+   * @param {HTML template} commentCell The template for one comment.
    * @private
    */
   async loadComments_(commentBox, commentCell) {
