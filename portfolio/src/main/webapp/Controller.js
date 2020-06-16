@@ -4,18 +4,37 @@ import UserHandler from '/UserHandler.js';
 export default class Controller {
 
   constructor(document) {
+    /** @member {String} username_ current user's username */
     this.username_ = undefined;
+    /** @member {bool} loggedIn_ whether the user has logged in */
     this.loggedIn_ = false;
+    /** @member {HTML document} document_ the current document loaded on webpage */
     this.document_ = document;
+    /** @member {CommentHandler} commentHandler_ 
+      * an instance of comment loading service module 
+      */
     this.commentHandler_ = new CommentHandler();
+    /** @member {UserHandler} userHandler_ 
+     * an instance of user login(out) service module 
+     */
     this.userHandler_ = new UserHandler();
   }
 
   /** Fetches comments and user's account information from server. */
   async init() {
-    await this.loadComments_(this.document_.getElementById('comments'), 
-                             this.document_.getElementById('comment-cell'));
-    await this.checkLoginStatus_();
+    try {
+      await this.loadComments_(this.document_.getElementById('comments'), 
+                               this.document_.getElementById('comment-cell'));
+    } catch(e) {
+      alert('Cannot load comments');
+      console.log(e);
+    }
+    try {
+      await this.checkLoginStatus_();
+    } catch(e) {
+      alert("Cannot check user's login status");
+      console.log(e);
+    }
   }
 
   /** Shows the change name form. */
