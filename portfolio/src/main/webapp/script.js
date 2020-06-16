@@ -14,7 +14,7 @@
 
 import Controller from '/Controller.js'
 
-// Fetches data from servelet when the document is loaded.
+// Fetches comment data from servelet when the document is loaded.
 // Checks whether the user has logged in and if not, get the 
 // login url from backend.
 window.onload = async () => {
