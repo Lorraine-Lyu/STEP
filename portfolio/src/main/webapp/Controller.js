@@ -4,18 +4,31 @@ import UserHandler from '/UserHandler.js';
 export default class Controller {
 
   constructor(document) {
-    /** @member {String} username_ current user's username */
+    /** 
+     * @member {String} username_ 
+     * current user's username 
+     * @private
+     */
     this.username_ = undefined;
-    /** @member {bool} loggedIn_ whether the user has logged in */
+    /** 
+     * @member {bool} loggedIn_ 
+     * whether the user has logged in 
+     * @private
+     */
     this.loggedIn_ = false;
-    /** @member {HTML document} document_ the current document loaded on webpage */
+    /** 
+     * @member {HTML document} document_ 
+     * @private
+     */
     this.document_ = document;
-    /** @member {CommentHandler} commentHandler_ 
-      * an instance of comment loading service module 
-      */
+    /** 
+     * @member {CommentHandler} commentHandler_  
+     * @private
+     */
     this.commentHandler_ = new CommentHandler();
-    /** @member {UserHandler} userHandler_ 
-     * an instance of user login(out) service module 
+    /** 
+     * @member {UserHandler} userHandler_  
+     * @private
      */
     this.userHandler_ = new UserHandler();
   }
