@@ -19,5 +19,10 @@ import Controller from '/Controller.js'
 // login url from backend.
 window.onload = async () => {
   window.controller = new Controller(document);
-  await window.controller.init();
+  try {
+    await window.controller.init();
+  } catch(e) {
+    alert('Webpage initialization failed');
+    console.log(e);
+  }
 }
