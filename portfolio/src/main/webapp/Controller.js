@@ -9,23 +9,23 @@ export default class Controller {
 
   constructor(document) {
     /** 
-     * @private @type {string} the string of current user's username 
+     * @private @type {string} The string of current user's username.
      */
     this.username_ = undefined;
     /** 
-     * @private @type {bool} the boolean indicating whether the user has logged in 
+     * @private @type {bool} Indicates whether the user has logged in.
      */
     this.loggedIn_ = false;
     /** 
-     * @private @type {HTML document} 
+     * @private @const @type {HTML document} 
      */
     this.document_ = document;
     /** 
-     * @private @type {CommentHandler}  
+     * @private @const @type {CommentHandler}  
      */
     this.commentHandler_ = new CommentHandler();
     /** 
-     * @private @type {UserHandler} 
+     * @private @const @type {UserHandler} 
      */
     this.userHandler_ = new UserHandler();
   }
