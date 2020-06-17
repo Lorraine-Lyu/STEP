@@ -43,9 +43,9 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_NAME = "name";
   private static final String COMMENT_TEXT = "text";
   // The object connected to datastore.
-  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The Java to JSON converter.
-  private static final Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

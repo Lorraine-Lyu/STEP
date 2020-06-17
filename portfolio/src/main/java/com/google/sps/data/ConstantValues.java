@@ -1,5 +1,6 @@
 package com.google.sps.data;
  
+/** All constant strings shared by files in the system. */
 public class ConstantValues {
 
   // Response content type and redirect path.

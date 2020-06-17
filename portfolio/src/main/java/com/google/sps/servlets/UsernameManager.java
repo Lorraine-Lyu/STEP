@@ -42,11 +42,11 @@ public class UsernameManager extends HttpServlet {
   private static final String USER_ID = "id";
   private static final String USER_NAME = "username";
   // The object connected to datastore.
-  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The object which does user login/logout.
-  private static final UserService userService = UserServiceFactory.getUserService();
+  private final UserService userService = UserServiceFactory.getUserService();
   // The Java to JSON converter.
-  private static final Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -55,12 +55,8 @@ public class UsernameManager extends HttpServlet {
     PrintWriter out = response.getWriter();
     // If the user has logged in, get the pre-registered username,
     // if not, get the login url.
-    Optional<String> loginUrl = userService.isUserLoggedIn() 
-                      ? Optional.empty()
-                      : Optional.of(userService.createLoginURL(INDEX_PATH));
-    Optional<String> username = userService.isUserLoggedIn()
-                              ? Optional.of(getUsername(userService.getCurrentUser().getUserId()))
-                              : Optional.empty();
+    Optional<String> loginUrl = Optional.ofNullable(userService.createLoginURL(INDEX_PATH));
+    Optional<String> username = Optional.ofNullable(getUsername(userService.getCurrentUser().getUserId()));
     // Always send the logout url to client.
     String logoutUrl = userService.createLogoutURL(INDEX_PATH);
     out.println(
