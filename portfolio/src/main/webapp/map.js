@@ -5,14 +5,14 @@
 class Coordinate {
   
   constructor(latitude, longitude, title, id) {
-    /** @private @const {float} latitude */
+    /** @private @const @type {float} latitude */
     this.latitude_ = latitude;
-    /** @private @const {float} longitude */
+    /** @private @const @type {float} longitude */
     this.longitude_ = longitude;
-    /** @private @const {String} title the note on the marker*/
+    /** @private @const @type {String} title the note on the marker*/
     this.title_ = title;
     /** 
-     * @private @const {id} id the div id associated with this Coordinate */
+     * @private @const @type {String} id the div id associated with this Coordinate */
     this.id_ = id;
   }
 
