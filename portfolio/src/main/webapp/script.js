@@ -12,26 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Fetches data from servelet when the document is loaded
-window.onload = async () => {
-  let commentResponse = undefined;
-  try {
-    commentResponse = await fetch('/comment');
-  } catch (e) {
-    alert('Cannot get response');
-    console.log(e);
-    return;
-  }
+import Controller from '/Controller.js'
 
+// Fetches comment data from servelet when the document is loaded.
+// Checks whether the user has logged in and if not, get the 
+// login url from backend.
+window.onload = async () => {
+  window.controller = new Controller(document);
   try {
-    const jsonArray = await commentResponse.json();
-    const comments = jsonArray
-      .map(entry => 
-      `<div class='entry'><p> ${entry.userName} : ${entry.comment}</p></div>`)
-      .join('');
-    document.getElementById('comments').innerHTML = comments;
-  } catch (e) {
-    alert('Cannot parse response');
+    await window.controller.init();
+  } catch(e) {
+    alert('Webpage initialization failed');
     console.log(e);
   }
 }
