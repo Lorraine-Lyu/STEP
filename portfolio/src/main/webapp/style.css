@@ -32,6 +32,10 @@ body {
   margin: auto;
 }
 
+.hidden-intro {
+  display: none;
+}
+
 .link {
   color: var(--pink-light);
   font-weight: bold;
@@ -48,6 +52,10 @@ body {
   border-bottom: 1px var(--green-dark) solid;
   margin-bottom: 16px;
   padding-bottom: 5px;
+}
+
+.show-intro {
+  display: block;
 }
 
 #comments {
@@ -73,6 +81,18 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+#comments {
+  box-shadow: 5px 10px 8px var(--green-dark);
+  height: 80%;
+  width: 22%;
+  float: right;
+}
+
+#map {
+  height: 320px;
+  width: 480px;
 }
 
 #round-head {
