@@ -121,7 +121,8 @@ public final class FindMeetingQuery {
    * @param request            The meeting request.
    * @return All the TimeRanges that required attendees are free to join.
    */
-  public List<TimeRange> ScheduleForRequiredAttendees(List<TimeRange> requiredTimeRanges, MeetingRequest request) {
+  public List<TimeRange> ScheduleForRequiredAttendees(
+      List<TimeRange> requiredTimeRanges, MeetingRequest request) {
 
     List<TimeRange> availableTimeRanges = new ArrayList();
     // Put a dummy event at the tail of the sorted list in order to make algorithm include the 
@@ -157,7 +158,8 @@ public final class FindMeetingQuery {
    * @param optionalAttendees A set of optional attendees.
    * @return A list of events with required attendees and a list of events with only required attendees attending.
    */
-  private Pair<List<TimeRange>, List<TimeRangeWrapper>> trimAndSortEventList(Collection<Event> events, Set<String> attendees, Set<String> optionalAttendees) {
+  private Pair<List<TimeRange>, List<TimeRangeWrapper>> trimAndSortEventList(
+      Collection<Event> events, Set<String> attendees, Set<String> optionalAttendees) {
 
     List<TimeRange> trimmedEventList = new ArrayList();
     List<TimeRangeWrapper> optionalTimeRanges = new ArrayList();
@@ -235,7 +237,8 @@ public final class FindMeetingQuery {
     }
 
     for (TimeRangeWrapper wrapper : optionalUnavailableTimes) {
-      for (int j = timeToIndex.get(wrapper.getWhen().start()); j < timeToIndex.get(wrapper.getWhen().end()); j++) {
+      for (int j = timeToIndex.get(wrapper.getWhen().start()); 
+           j < timeToIndex.get(wrapper.getWhen().end()); j++) {
         if (records[j] != Integer.MAX_VALUE) {
           records[j] += wrapper.getCount();
         }
