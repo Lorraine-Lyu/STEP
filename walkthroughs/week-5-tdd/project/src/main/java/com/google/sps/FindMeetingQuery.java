@@ -33,11 +33,11 @@ import javafx.util.Pair;
 // record number of absent people with a wrapper class.
 // 3. Project all start and end times to an array and get # of absent people for all time ranges
 // result from 1 : |[---------------]xxxxxx[--------]xxx[--------]xxxxx|
-// result from 2 : |[  1  ]    [  2    ]      [1]       [  2[1]  ]     | digits means # of absent ppl
-//
+// result from 2 : |[  1  ]    [  2    ]      [1]       [  2[1]  ]     | digits mean
+// number of absent people.
 // result from 3 : |[  1  ][ 0 ][ 2 ][xxxxx][0][1][0]xxx[ 2][3][2]xxxxx|
-// Then find the intervals with max value as small as possible, check indexToTime map to see if the 
-// duration is long enough.
+// Then find the intervals with max value as small as possible, check indexToTime map to see if 
+// the duration is long enough.
 // NOTE: The size of array for step 3 is 2*events. 
 // NOTE: Use maps to store the mapping between time and array index
  
@@ -72,7 +72,7 @@ public final class FindMeetingQuery {
     
   /**
    * Finds all availble time ranges for the new meeting.
-   * @param events A list of events potentially need to be considereded when scheduling the new meeting.
+   * @param events A list of events potentially need to be considereded when scheduling the meeting.
    * @param request The MeetingRequest with information about the new meeting to be scheduled.
    * @return A collection of TimeRanges available for the new meeting.
    */
@@ -156,7 +156,8 @@ public final class FindMeetingQuery {
    * @param events     A collection of events.
    * @param attendees  A set of people, represented by string, who will attend the new meeting.
    * @param optionalAttendees A set of optional attendees.
-   * @return A list of events with required attendees and a list of events with only required attendees attending.
+   * @return A list of events with required attendees and a list of events with only required 
+   * attendees attending.
    */
   private Pair<List<TimeRange>, List<TimeRangeWrapper>> trimAndSortEventList(
       Collection<Event> events, Set<String> attendees, Set<String> optionalAttendees) {
