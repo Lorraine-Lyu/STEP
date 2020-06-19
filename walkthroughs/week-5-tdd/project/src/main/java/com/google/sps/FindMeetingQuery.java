@@ -28,14 +28,18 @@ import java.util.Set;
 import javafx.util.Pair;
 
 // HOW IT WORKS (to find the greatest number to attend) :
+// 1. Find all time ranges when all required attendees are available.
+// 2. Find all time ranges when only optional attendees are available, 
+// record number of absent people with a wrapper class.
+// 3. Project all start and end times to an array and get # of absent people for all time ranges
+// result from 1 : |[---------------]xxxxxx[--------]xxx[--------]xxxxx|
+// result from 2 : |[  1  ]    [  2    ]      [1]       [  2[1]  ]     | digits means # of absent ppl
 //
-//
-//
-//
-//
-//
-//
-//
+// result from 3 : |[  1  ][ 0 ][ 2 ][xxxxx][0][1][0]xxx[ 2][3][2]xxxxx|
+// Then find the intervals with max value as small as possible, check indexToTime map to see if the 
+// duration is long enough.
+// NOTE: The size of array for step 3 is 2*events. 
+// NOTE: Use maps to store the mapping between time and array index
 
 /**
  * The class that performs the meeting schedule query to find all possible time for 
@@ -43,7 +47,7 @@ import javafx.util.Pair;
  */
 public final class FindMeetingQuery {
 
-  /** The wrapper class for TimeRange to record the number of people absent in one TimeRange */
+  /** The wrapper class for TimeRange to record the number of people absent in one TimeRange. */
   private class TimeRangeWrapper {
 
     private final TimeRange time;
@@ -73,23 +77,37 @@ public final class FindMeetingQuery {
    * @return A collection of TimeRanges available for the new meeting.
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-
+    // Filter out unrelated events and put timeranges of 
+    // events with required attendees, events only with optional attendees in separate list.
     Pair<List<TimeRange>, List<TimeRangeWrapper>> allRelevantTimes = 
-        trimAndSortEventList(events, new HashSet<String>(request.getAttendees()), new HashSet(request.getOptionalAttendees()));
+        trimAndSortEventList(events, 
+            new HashSet<String>(request.getAttendees()), new HashSet(request.getOptionalAttendees()));
     List<TimeRange> requiredTimeRanges = allRelevantTimes.getKey();
     List<TimeRangeWrapper> optionalAbsentTimeRanges = allRelevantTimes.getValue();
 
+    // Get all time ranges when all required attendees are free.
     List<TimeRange> availableTimeRanges = ScheduleForRequiredAttendees(requiredTimeRanges, request);
-    if (request.getOptionalAttendees().isEmpty()) return availableTimeRanges;
+    if (request.getOptionalAttendees().isEmpty()) {
+      return availableTimeRanges;
+    }
 
-    BiMap<Integer, Integer> timeToIndex = constructTimeStampMap(availableTimeRanges, optionalAbsentTimeRanges);
+    // Calculate all time fragments where number of people absent stay the same;
+    // map each time fragment to an array index.
+    BiMap<Integer, Integer> timeToIndex = 
+        constructTimeStampMap(availableTimeRanges, optionalAbsentTimeRanges);
     int[] absenceRecords = new int[timeToIndex.size()];
-    Pair<Integer, Integer> absenceBounds = markAbsenceNumber(absenceRecords, timeToIndex, availableTimeRanges, optionalAbsentTimeRanges);
+    Pair<Integer, Integer> absenceBounds = 
+        markAbsenceNumber(absenceRecords, timeToIndex, availableTimeRanges, optionalAbsentTimeRanges);
     int fewestAbsence = absenceBounds.getKey();
-    int mostAbsence = absenceBounds.getValue();
-    List<TimeRange> toReturn = getOptimalTimeRanges(fewestAbsence++, absenceRecords, timeToIndex.inverse(), request.getDuration());
-    while (toReturn.isEmpty() && request.getOptionalAttendees().size() > fewestAbsence + 1 && fewestAbsence <= mostAbsence) {
-      toReturn = getOptimalTimeRanges(fewestAbsence++, absenceRecords, timeToIndex.inverse(), request.getDuration());
+    int maxAbsence = absenceBounds.getValue();
+
+    // Start from checking time fragments with fewest absence, if find suitable time range, return. 
+    List<TimeRange> toReturn = 
+        getOptimalTimeRanges(fewestAbsence++, absenceRecords, timeToIndex.inverse(), request.getDuration());
+    while (toReturn.isEmpty() 
+        && request.getOptionalAttendees().size() > fewestAbsence + 1 && fewestAbsence <= maxAbsence) {
+      toReturn = 
+          getOptimalTimeRanges(fewestAbsence++, absenceRecords, timeToIndex.inverse(), request.getDuration());
     }
     if (fewestAbsence == request.getAttendees().size() + request.getOptionalAttendees().size()) {
       return new ArrayList();
@@ -98,6 +116,7 @@ public final class FindMeetingQuery {
   }
 
   /**
+   * Calculates the all time ranges that allows required attendees to join.
    * @param requiredTimeRanges All events that have required attendees.
    * @param request            The meeting request.
    * @return All the TimeRanges that required attendees are free to join.
@@ -132,7 +151,8 @@ public final class FindMeetingQuery {
   }
 
   /** 
-   * @param events     A collection of events 
+   * Leaves only related events and stores events with only optional attendees in separate list.
+   * @param events     A collection of events.
    * @param attendees  A set of people, represented by string, who will attend the new meeting.
    * @param optionalAttendees A set of optional attendees.
    * @return A list of events with required attendees and a list of events with only required attendees attending.
@@ -169,7 +189,14 @@ public final class FindMeetingQuery {
     return new Pair(trimmedEventList, optionalTimeRanges); 
   }
 
-  private BiMap<Integer, Integer> constructTimeStampMap(List<TimeRange> availableTimes, List<TimeRangeWrapper> optionalUnavailableTimes) {
+  /** 
+   * Finds all the start and end times need to consider, sort them and map them to array indexes.
+   * @param availableTimes The TimeRanges all required attendees are available.
+   * @param optionalUnavailableTimes The TimesRanges some optional attendees are not available.
+   * @return A map from each time mark(in minutes) to unique array index.
+   */
+  private BiMap<Integer, Integer> constructTimeStampMap(List<TimeRange> availableTimes, 
+                                                        List<TimeRangeWrapper> optionalUnavailableTimes) {
     Set<Integer> appearedTimes = new HashSet();
     for (TimeRange time : availableTimes) {
       appearedTimes.add(time.start());
@@ -189,8 +216,15 @@ public final class FindMeetingQuery {
     return timeToIndex;
   }
 
+  /** Given an empty array, change all values inside to represent the number of people absent
+   *  in each time range fragment.
+   * @param records The empty integer array with length equal to number of all start and end times.
+   * @param timeToIndex The map from each time mark(in minutes) to array index.
+   * @param availableTimes The TimeRanges all required attendees are available.
+   * @param optionalUnavailableTime The TimesRanges some optional attendees are not available.
+   */
   private Pair<Integer, Integer> markAbsenceNumber(int[] records, Map<Integer, Integer> timeToIndex, 
-                                 List<TimeRange> availableTimes, List<TimeRangeWrapper> optionalUnavailableTimes) {
+                                                   List<TimeRange> availableTimes, List<TimeRangeWrapper> optionalUnavailableTimes) {
     Arrays.fill(records, Integer.MAX_VALUE);
     int fewestAbsence = Integer.MAX_VALUE;
     int mostAbsence = 0;
@@ -202,22 +236,34 @@ public final class FindMeetingQuery {
 
     for (TimeRangeWrapper wrapper : optionalUnavailableTimes) {
       for (int j = timeToIndex.get(wrapper.getWhen().start()); j < timeToIndex.get(wrapper.getWhen().end()); j++) {
-        if (records[j] != Integer.MAX_VALUE) records[j] += wrapper.getCount();
+        if (records[j] != Integer.MAX_VALUE) {
+          records[j] += wrapper.getCount();
+        }
       }
     }
 
     records[records.length - 1] = Integer.MAX_VALUE;
 
     for (int absentPpl : records) {
-      if (absentPpl < fewestAbsence) fewestAbsence = absentPpl;
-      if (absentPpl > mostAbsence && absentPpl != Integer.MAX_VALUE) mostAbsence = absentPpl;
+      if (absentPpl < fewestAbsence) {
+        fewestAbsence = absentPpl;
+      }
+      if (absentPpl > mostAbsence && absentPpl != Integer.MAX_VALUE) {
+        mostAbsence = absentPpl;
+      }
     }
-    System.out.println(Arrays.toString(records));
     return new Pair(fewestAbsence, mostAbsence);
   }
 
-  /** Gets all the TimeRange that most people can join. */
-  private List<TimeRange> getOptimalTimeRanges(int fewestAbsence, int[] records, BiMap<Integer, Integer> indexToTime, long duration) {
+  /** 
+   *  Gets all the TimeRanges that most people can join.
+   *  @param fewestAbsence The number of people being absent allowed.
+   *  @param records The int array recording number of people being absent in each time fragment.
+   *  @param indexToTime The map converting index in array into time in a day.
+   *  @param duration The requested duration for the new meeting.
+   */
+  private List<TimeRange> getOptimalTimeRanges(int fewestAbsence, int[] records, 
+                                               BiMap<Integer, Integer> indexToTime, long duration) {
     int start = 0;
     int end = 0;
     int index = 0;
@@ -230,7 +276,9 @@ public final class FindMeetingQuery {
       } else if ((records[index] > fewestAbsence) && counting) {
         end = indexToTime.get(index);
         counting = false;
-        if (end - start >= duration) finalList.add(TimeRange.fromStartEnd(start, end, false));
+        if (end - start >= duration) { 
+          finalList.add(TimeRange.fromStartEnd(start, end, false));
+        }
       }
       index++;
     }
