@@ -142,12 +142,12 @@ public final class FindMeetingQuery {
     List<TimeRange> trimmedEventList = new ArrayList();
     List<Event> optionalEvents = new ArrayList();
     boolean noAttendees = true;
-    Set<String> optionalAttendeesCounts;
+    Set<String> optionalAttendeesSet;
  
     for (Iterator<Event> eventIterator = events.iterator(); eventIterator.hasNext();) {
       Event event = eventIterator.next();   
       noAttendees = true;
-      optionalAttendees = new HashSet<String>();
+      optionalAttendeesSet = new HashSet<String>();
       // This loop validates whether each event needs to be consider.
       // If one event doesn't contain any required attendee, it won't be added to the new event list.
       for (String people : event.getAttendees()) {
@@ -156,11 +156,11 @@ public final class FindMeetingQuery {
           noAttendees = false;
           break;
         } else if (optionalAttendees.contains(people)) {
-          optionalAttendees.add(people);
+          optionalAttendeesSet.add(people);
         }
       }
-      if (noAttendees && optionalAttendees.size() > 0) {
-        optionalEvents.add(new Event(event.getTitle(), event.getWhen(), optionalAttendees));
+      if (noAttendees && optionalAttendeesSet.size() > 0) {
+        optionalEvents.add(new Event(event.getTitle(), event.getWhen(), optionalAttendeesSet));
       }
     }
  
@@ -209,6 +209,7 @@ public final class FindMeetingQuery {
     for (int i = 0; i < absentNameList.length; i++) {
       absentNameList[i] = new HashSet<String>();
     }
+    Arrays.fill(records, Integer.MAX_VALUE);
     int fewestAbsence = Integer.MAX_VALUE;
     int maxAbsence = 0;
     for (TimeRange time : availableTimes) {
@@ -237,6 +238,7 @@ public final class FindMeetingQuery {
         maxAbsence = absentPpl;
       }
     }
+    System.out.println(Arrays.toString(records));
     return new Pair(fewestAbsence, maxAbsence);
   }
  
