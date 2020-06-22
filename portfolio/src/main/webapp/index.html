@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="style.css">
     <script src="nav.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
   </head>
   <body>
     <div id="content">
@@ -38,13 +38,35 @@
       <div class="main">
         <iframe class="frame" src="main.html" width="76%" height="96%" id="sub-page"></iframe>
         <div id="comments"></div>
-        <form action="/comment" method="POST" id="comment-box">
-          <label for="name">Preferred name:</label>
-          <input name="name" class="field" type="text"></input>
-          <label>Comments:</label>
-          <textarea name="text" class="field" rows="3" cols="40"></textarea>
-          <input type="submit" id="submit-btn">
-        </form>
+        <template id="comment-cell">
+          <p><span id='guest-name'></span> : <span id='guest-comment'></span>
+        </template>
+        <div class="form-popup hidden-elem" id="name-form">
+          <form action="/login" class="form-container" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            <button type="submit" class="submit-btn">Change Name</button>
+            <button type="submit" class="submit-btn cancel" 
+                onclick="window.controller.closeNameForm()">Cancel</button>
+          </form>
+        </div>
+        <div id="div-input-comment">
+          <p>Hello <span id="username"></span>!</p>
+          <p>click 
+            <button id="change-name" onclick="window.controller.openNameForm()">here</button>
+            to change your username
+          </p>
+          <form action="/comment" method="POST" class="hidden-elem" id="form-comment">
+            <label>Post a comment on my portfolio:</label>
+            <textarea name="text" class="field" rows="3" cols="40"></textarea>
+            <input type="hidden" name="name" value="stranger" id="hidden-username"/>
+            <input type="submit" class="submit-btn">
+            <p> Click <a href="" id="logout">here</a> to log out</p>
+          </form>
+          <p class="hidden-elem" id="p-login"> 
+              To post a comment, please login <a href="" id="login">here</a>
+          </p>
+        </div>
       </div>
     </div>
   </body>
