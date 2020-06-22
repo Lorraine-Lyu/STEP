@@ -1,6 +1,6 @@
-import CommentHandler from '/CommentHandler.js';
-import NavbarHandler from '/NavbarHandler.js';
-import UserHandler from '/UserHandler.js';
+import {CommentHandler} from '/CommentHandler.js';
+import {NavbarHandler} from '/NavbarHandler.js';
+import {UserHandler} from '/UserHandler.js';
 
 /**
  * The adapter class which delegates actions required from view to 
@@ -14,23 +14,29 @@ export default class Controller {
      */
     this.username_ = undefined;
     /** 
-     * @private @type {bool} Indicates whether the user has logged in.
+     * @private 
+     * @type {bool} 
+     * Indicates whether the user has logged in.
      */
     this.loggedIn_ = false;
     /** 
-     * @private @const @type {HTML document} 
+     * @private @const 
+     * @type {!HTML document} 
      */
     this.document_ = document;
     /** 
-     * @private @const @type {CommentHandler}  
+     * @private @const 
+     * @type {!CommentHandler}  
      */
     this.commentHandler_ = new CommentHandler();
     /** 
-     * @private @const @type {UserHandler} 
+     * @private @const 
+     * @type {!UserHandler} 
      */
     this.userHandler_ = new UserHandler();
     /** 
-     * @private @const @type {NavbarHandler} 
+     * @private @const 
+     * @type {!NavbarHandler} 
      */
     this.navbarHandler_ = new NavbarHandler(document);
   }
@@ -73,8 +79,8 @@ export default class Controller {
   /**
    * Loads all comments from backend.
    * This function is called when the page is loaded.
-   * @param {HTML div object} commentBox The div in document with id "comment-box".
-   * @param {HTML template} commentCell The template for one comment.
+   * @param {!HTML div object} commentBox The div in document with id "comment-box".
+   * @param {!HTML template} commentCell The template for one comment.
    * @private
    */
   async loadComments_(commentBox, commentCell) { 

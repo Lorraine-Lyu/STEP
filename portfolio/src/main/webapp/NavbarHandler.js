@@ -1,8 +1,9 @@
 /** The class which tracks current loaded page and changes html page. */
-export default class NavbarHandler {
+class NavbarHandler {
 
   /**
-   * @private @const @type {String Array}
+   * @private @const 
+   * @type {!Array<string>}
    * The List of relative paths to all files to be loaded in iframe .
    */
   static sources_ = [
@@ -13,7 +14,10 @@ export default class NavbarHandler {
   ];
 
   constructor(document) {
-    /** @private @const @type {HTML document} */
+    /** 
+     * @private @const 
+     * @type {!HTML document} 
+     */
     this.document_ = document;
   }
 
@@ -31,3 +35,5 @@ export default class NavbarHandler {
   }
 
 }
+
+export {NavbarHandler};
