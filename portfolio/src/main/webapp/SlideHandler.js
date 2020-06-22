@@ -2,10 +2,10 @@
 export default class SlideHandler {
   
   /** 
-   * @static @const @type {integer} All slides have 5 pages, 
+   * @static @private @const @type {integer} All slides have 5 pages, 
    * so the max index is 4. 
    */
-  static MAX_PAGE_INDEX = 4;
+  static MAX_PAGE_INDEX_ = 4;
 
   constructor(document) {
     /** @private @type {integer} Index of the page slide 1 is showing. */
@@ -56,10 +56,10 @@ export default class SlideHandler {
   updateFlip_(prev, show, slideStr) {
     let slide = 
         this.document_.getElementById(slideStr).getElementsByTagName("img");
-    if (show > SlideHandler.MAX_PAGE_INDEX) {
+    if (show > SlideHandler.MAX_PAGE_INDEX_) {
       show = 0;
     } else if (show < 0) {
-      show = SlideHandler.MAX_PAGE_INDEX;
+      show = SlideHandler.MAX_PAGE_INDEX_;
     }
 
     slide[show].classList.add("pic-show");
