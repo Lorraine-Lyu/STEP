@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SlideController from '/SlideController.js';
+import {SlideController} from '/SlideController.js';
 
 /** Connects the view to SlideHandler instance. */
 window.onload = () => {

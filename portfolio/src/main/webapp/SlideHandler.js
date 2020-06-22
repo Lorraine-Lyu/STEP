@@ -1,18 +1,30 @@
 /** The class handling all slides. */
-export default class SlideHandler {
+class SlideHandler {
   
   /** 
-   * @static @private @const @type {integer} All slides have 5 pages, 
-   * so the max index is 4. 
+   * @static @private @const 
+   * @type {integer}  
+   * All slides have 5 pages, so the max index is 4. 
    */
   static MAX_PAGE_INDEX_ = 4;
 
   constructor(document) {
-    /** @private @type {integer} Index of the page slide 1 is showing. */
+    /** 
+     * @private 
+     * @type {integer} 
+     * Index of the page slide 1 is showing. 
+     */
     this.slide1_ = 0;
-    /** @private @type {integer} Index of the page slide 2 is showing. */
+    /**
+     * @private 
+     * @type {integer} 
+     * Index of the page slide 2 is showing. 
+     */
     this.slide2_ = 0;
-    /** @private @const @type {HTML document} */
+    /** 
+     * @private @const 
+     * @type {!HTML document} 
+     */
     this.document_ = document;
     this.init_();
   }
@@ -54,7 +66,7 @@ export default class SlideHandler {
    * @private
    */
   updateFlip_(prev, show, slideStr) {
-    let slide = 
+    const slide = 
         this.document_.getElementById(slideStr).getElementsByTagName("img");
     if (show > SlideHandler.MAX_PAGE_INDEX_) {
       show = 0;
@@ -67,3 +79,5 @@ export default class SlideHandler {
     return show;
   }
 }
+
+export {SlideHandler};

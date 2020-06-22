@@ -1,12 +1,13 @@
-import SlideHandler from '/SlideHandler.js';
+import {SlideHandler} from '/SlideHandler.js';
 
 /** The controller handling all slideshows. */
-export default class SlideController {
+class SlideController {
 
   constructor(document) {
     /** 
-     * @private @const @type {SlideHandler} The service 
-     * module manipulates the slideshows. 
+     * @private @const 
+     * @type {!SlideHandler}  
+     * The service module manipulates the slideshows. 
      */
     this.slideHandler_ = new SlideHandler(document);
   }
@@ -21,3 +22,5 @@ export default class SlideController {
   }
   
 }
+
+export {SlideController};
