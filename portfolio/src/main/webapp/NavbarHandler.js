@@ -1,19 +1,20 @@
 /** The class which tracks current loaded page and changes html page. */
 export default class NavbarHandler {
 
+  /**
+   * @private @const @type {String Array}
+   * The List of relative paths to all files to be loaded in iframe .
+   */
+  static sources_ = [
+    'main.html', 
+    'introduction.html', 
+    'projects.html', 
+    'gallery.html',
+  ];
+
   constructor(document) {
     /** @private @const @type {HTML document} */
     this.document_ = document;
-    /**
-     * @private @const @type {String Array}
-     * The List of relative paths to all files to be loaded in iframe .
-     */
-    this.sources_ = [
-      'main.html', 
-      'introduction.html', 
-      'projects.html', 
-      'gallery.html',
-    ];
   }
 
   /** 
@@ -26,7 +27,7 @@ export default class NavbarHandler {
       return;
     }
     const frame = this.document_.getElementById('sub-page');
-    frame.src = this.sources_[pageIndex];
+    frame.src = NavbarHandler.sources_[pageIndex];
   }
 
 }
