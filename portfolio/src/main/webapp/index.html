@@ -5,23 +5,30 @@
     <title>Lorraine Lyu's Portfolio</title>
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="style.css">
-    <script src="nav.js"></script>
     <script src="script.js" type="module"></script>
   </head>
   <body>
     <div id="content">
       <ul id="navbar">
         <li class="nav-button">
-          <button class="nav-link" onclick="loadFrame(0)">Home</button>
+          <button class="nav-link" onclick="window.controller.loadFrame(0)">
+            Home
+          </button>
         </li>
         <li class="nav-button">
-          <button class="nav-link" onclick="loadFrame(1)">Introduction</button>
+          <button class="nav-link" onclick="window.controller.loadFrame(1)">
+            Introduction
+          </button>
         </li>
         <li class="nav-button">
-          <button class="nav-link" onclick="loadFrame(2)">Projects</button>
+          <button class="nav-link" onclick="window.controller.loadFrame(2)">
+            Projects
+          </button>
         </li>
         <li class="nav-button">
-          <button class="nav-link" onclick="loadFrame(3)">Gallery</button>
+          <button class="nav-link" onclick="window.controller.loadFrame(3)">
+            Gallery
+          </button>
         </li>
         <li>
           <a class="ext-link" href="https://github.com/Lorraine-Lyu" title="Github">

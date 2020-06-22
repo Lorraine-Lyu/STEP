@@ -1,4 +1,5 @@
 import CommentHandler from '/CommentHandler.js';
+import NavbarHandler from '/NavbarHandler.js';
 import UserHandler from '/UserHandler.js';
 
 /**
@@ -28,6 +29,10 @@ export default class Controller {
      * @private @const @type {UserHandler} 
      */
     this.userHandler_ = new UserHandler();
+    /** 
+     * @private @const @type {NavbarHandler} 
+     */
+    this.navbarHandler_ = new NavbarHandler(document);
   }
 
   /** Fetches comments and user's account information from server. */
@@ -57,11 +62,19 @@ export default class Controller {
     this.document_.getElementById('name-form').classList.add('hidden-elem');
   }
 
+  /** 
+   * Loads html page corresponding to the page index.
+   * @param {integer} index The page index for possible html page.
+   */
+  loadFrame(index) {
+    this.navbarHandler_.loadFrame(index);
+  }
+
   /**
    * Loads all comments from backend.
    * This function is called when the page is loaded.
-   * @param {HTML div object} commentBox The div in document with id "comment-box"
-   * @param {HTML template} commentCell The template for one comment
+   * @param {HTML div object} commentBox The div in document with id "comment-box".
+   * @param {HTML template} commentCell The template for one comment.
    * @private
    */
   async loadComments_(commentBox, commentCell) { 
