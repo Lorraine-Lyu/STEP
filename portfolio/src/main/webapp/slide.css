@@ -1,10 +1,10 @@
 /* styles for the slideshow */
-.btn-right {
+.slide-btn-right {
   right: 0;
 }
 
 .pic {
-    margin: auto;
+  margin: auto;
 }
 
 .slides .pic {
@@ -15,7 +15,7 @@
   display: block;
 }
 
-.slide {
+.slides {
   background-color: #1c3334;
   height: 480px;
   margin-bottom: 30px;
@@ -23,7 +23,7 @@
   width: 720px;
 }
 
-.s-btn {
+.slide-btn {
   border: none;
   color: #da7b93;
   font: bold 32px;

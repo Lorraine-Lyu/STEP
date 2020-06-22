@@ -42,6 +42,10 @@ body {
 }
 
 .hidden-elem {
+  display:none;
+}
+
+.hidden-intro {
   display: none;
 }
 
@@ -72,6 +76,10 @@ body {
   margin: auto;
   padding: 4px 15px;
 }
+  
+.show-intro {
+  display: block;
+}
 
 #comments {
   box-shadow: 5px 10px 8px var(--green-dark);
@@ -96,6 +104,11 @@ body {
   height: 30%;
   margin-right: 2%;
   width: 20%;
+}
+
+#map {
+  height: 320px;
+  width: 480px;
 }
 
 #round-head {
