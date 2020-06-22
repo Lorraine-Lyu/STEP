@@ -39,7 +39,13 @@ import javafx.util.Pair;
 // Then find the intervals with max value as small as possible, check indexToTime map to see if 
 // the duration is long enough.
 // NOTE: The size of array for step 3 is 2*events. 
-// NOTE: Use maps to store the mapping between time and array index
+// NOTE: Use maps to store the mapping between time and array index.
+
+// RUNTIME ANALYSIS:
+// worst case: O(n^2), n stands for the total number of events.
+// The array for absent people for all time ranges has length 2n,
+// and it takes at most n time to iterate through the list and 
+// find the timerange long enough for the new meeting.
  
 /**
  * The class that performs the meeting schedule query to find all possible time for 
@@ -238,7 +244,6 @@ public final class FindMeetingQuery {
         maxAbsence = absentPpl;
       }
     }
-    System.out.println(Arrays.toString(records));
     return new Pair(fewestAbsence, maxAbsence);
   }
  
