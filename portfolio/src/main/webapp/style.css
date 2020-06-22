@@ -25,11 +25,24 @@ body {
   overflow: auto;
 }
 
+.form-popup {
+  position: fixed;
+  bottom: 15px;
+  background-color: var(--green-dark);
+  right: 15px;
+  z-index: 9;
+}
+
+
 .frame {
   box-shadow: 5px 10px 8px var(--green-dark);
   border: none;
   float: left;
   margin: auto;
+}
+
+.hidden-elem {
+  display:none;
 }
 
 .hidden-intro {
@@ -54,6 +67,16 @@ body {
   padding-bottom: 5px;
 }
 
+.submit-btn {
+  background-color: var(--green-dark);
+  border: none;
+  color: var(--green-light);
+  display: block;
+  font-size: 12px;
+  margin: auto;
+  padding: 4px 15px;
+}
+  
 .show-intro {
   display: block;
 }
@@ -66,15 +89,6 @@ body {
   width: 20%;
 }
 
-#comment-box {
-  box-shadow: 5px 10px 8px var(--green-dark);
-  display: block;
-  float: right;
-  height: 30%;
-  margin-right: 2%;
-  width: 20%;
-}
-
 #content {
   color: var(--pink-light);
   height: 100%;
@@ -83,11 +97,13 @@ body {
   width: 100%;
 }
 
-#comments {
+#div-input-comment {
   box-shadow: 5px 10px 8px var(--green-dark);
-  height: 80%;
-  width: 22%;
+  display: block;
   float: right;
+  height: 30%;
+  margin-right: 2%;
+  width: 20%;
 }
 
 #map {
@@ -105,15 +121,6 @@ body {
   width: 200px;
 }
 
-#submit-btn {
-  background-color: var(--green-dark);
-  border: none;
-  color: var(--green-light);
-  display: block;
-  font-size: 12px;
-  margin: auto;
-  padding: 4px 15px;
-}
 
 
 

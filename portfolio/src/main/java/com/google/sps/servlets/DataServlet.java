@@ -14,6 +14,10 @@
 
 package com.google.sps.servlets;
 
+import static com.google.sps.data.ConstantValues.DEFAULT_VAL;
+import static com.google.sps.data.ConstantValues.INDEX_PATH;
+import static com.google.sps.data.ConstantValues.JSON_CONTENT_TYPE;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -34,20 +38,14 @@ import java.util.List;
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  // Response content type and redirect path.
-  private final String HTML_CONTENT_TYPE = "text/html";
-  private final String JSON_CONTENT_TYPE = "application/json";
-  private final String INDEX_PATH = "/index.html";
-  // The type of entity in database, fields in entity.
-  private final String ENTITY_TYPE = "comment";
-  private final String COMMENT_NAME = "name";
-  private final String COMMENT_TEXT = "text";
-  // The default value for undefined fields.
-  private final String DEFAULT_VAL = "";
+  // The type of entity in database and fields in entity.
+  private static final String ENTITY_TYPE = "comment";
+  private static final String COMMENT_NAME = "name";
+  private static final String COMMENT_TEXT = "text";
   // The object connected to datastore.
-  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   // The Java to JSON converter.
-  Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -65,6 +63,9 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
+   * @param request       The current HTTP request being handled
+   * @param name          The parameter name
+   * @param defaultValue  The default string if the field does not exist in request
    * @return the request parameter, or the default value if the parameter
    *         was not specified by the client.
    */
