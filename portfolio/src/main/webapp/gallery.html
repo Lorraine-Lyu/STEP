@@ -5,7 +5,7 @@
     <title>Lorraine Lyu's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slide.css">
-    <script src="slide.js" ></script>
+    <script src="slide.js" type="module"></script>
   </head>
   <body>
     <div id="content">
@@ -17,8 +17,14 @@
           <img class="pic" src="images/cat2.jpg" alt="My cat and his new bed">
           <img class="pic" src="images/cat3.jpg" alt="My cat taking over my parents' bed">
           <img class="pic" src="images/cat4.jpg" alt="My cat on his first birthday">
-          <button class="slide-btn" onclick="flip(-1, 1)"><</button>
-          <button class="slide-btn-right slide-btn" onclick="flip(1, 1)">></button>
+          <button class="slide-btn" onclick="window.controller.flip(-1, 1)">
+            &#10094
+          </button>
+          <button 
+              class="slide-btn-right slide-btn" 
+              onclick="window.controller.flip(1, 1)">
+            &#10095
+          </button>
         </div>
         <div class="slides" id="slide2">
           <img class="pic" src="images/drawing1.jpg" alt="Chinese Painting, White Plums">
@@ -26,8 +32,14 @@
           <img class="pic" src="images/drawing3.jpg" alt="Paper Art, Chameleon">
           <img class="pic" src="images/drawing4.jpg" alt="Oil Painting, Self Portrait">
           <img class="pic" src="images/drawing5.jpg" alt="Digital sketching practice">
-          <button class="slide-btn" onclick="flip(-1, 2)"><</button>
-          <button class="slide-btn-right slide-btn" onclick="flip(1, 2)">></button>
+          <button class="slide-btn" onclick="window.controller.flip(-1, 2)">
+            &#10094
+          </button>
+          <button 
+              class="slide-btn-right slide-btn" 
+              onclick="window.controller.flip(1, 2)">
+            &#10095
+          </button>
         </div>
       </div>
     </div>
