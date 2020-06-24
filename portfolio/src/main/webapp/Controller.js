@@ -39,6 +39,7 @@ export default class Controller {
      * @type {!NavbarHandler} 
      */
     this.navbarHandler_ = new NavbarHandler(document);
+    this.navbarHandler_.init();
   }
 
   /** Fetches comments and user's account information from server. */
