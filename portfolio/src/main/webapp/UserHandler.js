@@ -1,10 +1,10 @@
 /** The class which checks user's login status. */
-export default class UserHandler {
+class UserHandler {
   
   /** Gets user's login status and helpful information.
    * If user has logged in, show the commentbox and username;
    * if not, show the log in url.
-   * @param {Controller} controller The Controller of current webapp
+   * @param {!Controller} controller The Controller of current webapp.
    * @private
    */
   async loadLoginStatus_(controller) {
@@ -34,3 +34,5 @@ export default class UserHandler {
     }
   }
 }
+
+export {UserHandler};
