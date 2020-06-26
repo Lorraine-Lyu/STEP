@@ -6,7 +6,7 @@ class NavbarHandler {
    * @type {!Array<string>}
    * The List of relative paths to all files to be loaded in iframe .
    */
-  static sources_ = [
+  static SOURCES_ = [
     'home.html', 
     'introduction.html', 
     'projects.html', 
@@ -19,7 +19,6 @@ class NavbarHandler {
      * @type {!HTML document} 
      */
     this.document_ = document;
-    this.init.bind(this);
   }
 
   /** 
@@ -28,10 +27,10 @@ class NavbarHandler {
    */
   loadFrame(index) {
     const frame = this.document_.getElementById('sub-page');
-    if (index < 0 || index >= NavbarHandler.sources_.length) {
+    if (index < 0 || index >= NavbarHandler.SOURCES_.length) {
       throw "Index out of range.";
     }
-    frame.src = NavbarHandler.sources_[index]; 
+    frame.src = NavbarHandler.SOURCES_[index]; 
   }
 
   /**
@@ -41,10 +40,10 @@ class NavbarHandler {
     const template = this.document_.querySelector('#nav-cell');
     const navbar = this.document_.querySelector('#navbar');
     let index = undefined;
-    for (index = NavbarHandler.sources_.length - 1; index >= 0; index--) {
+    for (index = NavbarHandler.SOURCES_.length - 1; index >= 0; index--) {
       const clone = template.content.cloneNode(true);
       const btn = clone.querySelector('#nav-btn');
-      btn.innerHTML = NavbarHandler.sources_[index].split('.')[0];
+      btn.innerHTML = NavbarHandler.SOURCES_[index].split('.')[0];
       navbar.insertBefore(clone, navbar.firstChild);
     }
     const buttons = navbar.getElementsByClassName('nav-link');
